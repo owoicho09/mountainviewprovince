@@ -1,0 +1,60 @@
+*,
+::before,
+::after{
+    box-sizing: border-box;
+  background-color: #F1F1F1;
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+}
+.p-info-container{
+    padding: 15px;
+}
+.font-sora{
+    font-family: "Sora", system-ui;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.breadcrumb{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+.icons,.prev-icon{
+    width: 15px;
+    height: 15px;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 1.5rem 0rem;
+}
+.p-p{
+    width: 100px;
+    aspect-ratio: 1/1;
+    position: relative;
+    object-fit: center;
+    object-position: cover;
+    display: flex;
+    justify-content: center;
+}
+.p-p img{
+    border-radius: 50%;
+}
+label{
+    font-weight: 600;
+    font-size: 12px;
+}
+input{
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #E9D3C5;
+    font-weight: 400;
+    font-size: 12px;
+    border: none;
+}

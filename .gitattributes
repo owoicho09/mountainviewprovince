@@ -1,0 +1,13 @@
+# Set text files to use LF in the repository
+* text=auto
+
+# Enforce LF for specific types (e.g., CSS, JS, HTML)
+*.css eol=lf
+*.js eol=lf
+*.html eol=lf
+*.py eol=lf
+
+# Set binary files to be ignored for line-ending normalization
+*.png binary
+*.jpg binary
+*.svg binary

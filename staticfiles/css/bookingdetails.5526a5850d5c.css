@@ -1,0 +1,104 @@
+*,
+::before,
+::after{
+    box-sizing: border-box;
+  font-family: "Sora", system-ui;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: #F1F1F1;
+}
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+}
+section h2{
+    font-weight: 600;
+    font-size: 16px;
+    margin: 15px 0px;
+}
+.prev-icon{
+    width: 20px;
+    height: 20px;
+}
+#booking-detail-container{
+    width: 100%;
+    padding: 15px;
+}
+.breadcrumb,#selected-hostel,#room-no,#room-cat,
+#n-bed,#b-rate,#total-pay,#pay-date,
+#pay-method,#pay-status{
+    display: flex;
+}
+.breadcrumb{
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+#selected-hostel{
+    margin: 20px 0px;
+    align-items: center;
+}
+#selected-hostel p{
+    margin: 0;
+}
+
+.hos-name{
+    font-weight: 600;
+    font-size: 16px;
+}
+.booking{
+    font-weight: 400;
+    font-size: 12px;
+}
+.booked-details{
+    margin-left: 5px;
+}
+.room-details-content,.payment-details-content{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #A19B9B;
+    background-color:#F0EBE8;
+}
+#n-bed,#room-cat,
+#b-rate,#room-no,
+#n-bed p,
+#room-cat p,
+#b-rate p,
+#room-no p,
+#total-pay,
+#total-pay p,
+#pay-date,
+#pay-date p,
+#pay-method,
+#pay-method p,
+#pay-status,
+#pay-status p
+{
+    background-color:#F0EBE8;
+}
+
+#n-bed,
+#room-cat,
+#b-rate,
+#room-no,
+#total-pay,
+#pay-date,
+#pay-method,
+#pay-status{
+    display: flex;
+    justify-content: space-between;
+}
+.room-details-content div p:nth-of-type(1),
+.payment-details-content div p:nth-of-type(1){
+    font-weight: 400;
+    font-size: 12px;
+}
+.room-details-content div p:nth-of-type(2),
+.payment-details-content div p:nth-of-type(2){
+    font-weight: 600;
+    font-size: 12px;
+}
+#room-details{
+    margin: 3rem 0;
+}

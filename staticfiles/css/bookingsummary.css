@@ -1,0 +1,220 @@
+*,
+::before,
+::after{
+    box-sizing: border-box;
+    font-family: "Sora", system-ui;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+body{
+    background-color: #F1F1F1;
+}
+h1,h2,h3,h4,h5,h6       {
+    margin: 0;
+    padding: 0;
+}
+p{
+    margin: 8px;
+}
+.booking-summary-container{
+    width: 100%;
+    min-height: 100vh;
+    padding: 15px;
+    height: auto;
+}
+.breadcrumb{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+.icons,.prev-icon{
+    width: 20px;
+    height: 20px;
+}
+.hos-name{
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0px;
+}
+.location{
+    font-weight: 400;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin: 2px  0px;
+}
+#selected-hostel{
+    margin: 10px 0px;
+    align-items: center;
+    gap: 10px;
+}
+#selected-hostel,#room-no,#room-cat,
+#n-bed,#b-rate,#total-pay,#sf,
+#grand-total,#payment-options{
+    display: flex;
+}
+#room-no,#room-cat,
+#n-bed,#b-rate,#total-pay,#sf,#grand-total{
+    justify-content: space-between;
+}
+.room-details-content div p:nth-of-type(1),
+.payment-details-content div p:nth-of-type(1){
+    font-weight: 400;
+    font-size: 12px;
+}
+.room-details-content div p:nth-of-type(2),
+.payment-details-content div p:nth-of-type(2){
+    font-weight: 600;
+    font-size: 12px;
+}
+.room-details-content,.payment-details-content{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(161, 155, 155,0.5);
+    background-color:#F0EBE8;
+}
+
+#n-bed,#room-cat,
+#b-rate,#room-no,
+#n-bed p,
+#room-cat p,
+#b-rate p,
+#room-no p,
+#total-pay,
+#total-pay p,
+#sf,
+#sf p,
+#grand-total,
+#grand-total p
+{
+    background-color:#F0EBE8;
+}
+#payment-total{
+    justify-content: space-evenly;
+}
+/* input[type="radio"]{
+    width: 30%;
+    height: 100%;
+    aspect-ratio: 2/0.8;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    position: relative;
+    background-color: #D9D9D9;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+input[type="radio"]::after{
+    content: '';
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 2/0.8;
+    position: absolute;
+}
+input[type="radio"]:focus,input[type="radio"]:checked{
+    outline: 1.5px solid #863A0A;
+}
+#payment-method input[type="radio"]:nth-of-type(1)::after{
+    background-image: url('../images/flutterwave.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#payment-method input[type="radio"]:nth-of-type(2)::after{
+    background-image: url('../images/remita.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#payment-method input[type="radio"]:nth-of-type(3)::after{
+    background-image: url('../images/paystack.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+} */
+/* #flutterBtn{
+    background-image: url('../images/flutterwave.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#RemmitaBtn{
+    background-image: url('../images/remita.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#pStackBtn{
+    background-image: url('../images/paystack.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+} */
+#payment-method{
+    flex-direction: column;
+    margin: 4em 0em;
+}
+#payment-options{
+    outline: 0.45px solid rgba(161, 155, 155,0.5);
+    padding: 15px;
+    background-color: #F0EBE8;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+button{
+    border: none;
+    padding: 0 10px;
+    background-color: rgba(217, 217, 217, 1);
+}
+.pay-form{
+    width: 33.33%;
+    height: 100%;
+    aspect-ratio: 1/0.5;
+    margin: 0;
+    /* padding: 5px; */
+}
+.proceed-btn{
+    width: 100%;
+    height: 100%;
+}
+.button-section{
+    width: 100%;
+}
+#p-to-pay{
+    width: inherit;
+    background-color: #863A0A;
+    border: transparent;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
+#room-details h2,#payment-details h2,
+#payment-method h2{
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 1.5em ;
+    margin-bottom: 1em ;
+    margin-left: 0em;
+    margin-right: 0em;
+}
+#grand-total p{
+    font-weight: 600;
+    font-size: 12px;
+}
+#grand-total p:last-child{
+    color: #863A0A;
+
+}
+.divider{
+    opacity: 0.5;
+}

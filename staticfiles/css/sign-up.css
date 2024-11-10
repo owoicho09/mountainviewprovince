@@ -1,0 +1,157 @@
+*,
+::before,
+::after{
+    box-sizing: border-box;
+  font-family: "Sora", system-ui;
+  font-optical-sizing: auto;
+  font-style: normal;
+  /* background-color: #F1F1F1; */
+}
+html{
+  background-color: #F1F1F1;
+}
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+}
+.signup-header h2{
+    font-weight: 600;
+    font-size: 18px;
+}
+.signup-header p{
+    font-weight: 400;
+    font-size: 12px;
+    margin: 2px;
+    color: #565454;
+}
+.signup-header{
+    margin: 25px 0px;
+    /* border: 1px solid black; */
+}
+.sign-up-container{
+    padding: 15px;
+  background-color: #F1F1F1;
+}
+.w-full{
+    width: 100%;
+
+}
+input,select{
+    padding:15px;
+    background-color: #D9D9D9;
+    border: transparent;
+    border-radius: 5px;
+    overflow: hidden;
+    outline: none;
+}
+input:focus{
+    border: 2px solid #863A0A;
+    /* border: 1px solid black; */
+    overflow: hidden;
+    box-shadow: none;
+
+}
+.form-group label{
+    width: 100%;
+    font-weight:600;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.switch-icons{
+    width: 15px;
+    height: 15px;
+    color: black;
+}
+
+.select-selected{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 5px;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    border: none;
+}
+.select-selected:hover{
+    border: 1px solid #863A0A;
+    opacity: 1;
+    box-shadow: none;
+    /* outline: 1px solid yellow; */
+}
+.select-hide,.not-expanded{
+    display: none;
+}
+.select-items{
+    width: 100%;
+    height: auto;
+    margin: 3px 0px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+}
+.option:hover{
+    background-color: #ACABAB;
+    padding: 5px;
+    border-radius: 5px;
+}
+input,.select-selected p,.select-items div p {
+    font-weight: 400;
+    font-size: 12px;
+    color: #282727;
+}
+.form-group{
+    margin: 2rem 0rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.custom-select{
+    width: 100%;
+}
+#register-btn{
+    width: 100%;
+    padding: 15px;
+    background-color: #863A0A;
+    color: white;
+    outline: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
+.uselogin{
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 10px;
+}
+a{
+    color: #863A0A;
+    font-weight: 600;
+    text-decoration: none;
+}
+.password-container{
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.eye-icon svg {
+    width: 15px;
+    height: 15px;
+    stroke: #333;
+}
+.input-has-value {
+    background-color: #E9D3C5;
+}
+.select-has-value {
+    background-color: #E9D3C5;
+}
+

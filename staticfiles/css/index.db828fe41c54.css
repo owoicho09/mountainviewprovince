@@ -1,0 +1,100 @@
+*,::before,::after{
+    box-sizing: border-box;
+  font-family: "Sora", system-ui;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: #F1F1F1;
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+}
+.home-container{
+    background-color: #F1F1F1;
+    min-width: 100%;
+    height: 100dvh;
+    padding: 10px;
+}
+.heading-box{
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.explore-title{
+    font-size: 16px;
+    margin: 0;
+}
+.header-content{
+    display: flex;
+    flex-direction: column;
+}
+.header-content p{
+    margin: 3px 0px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #565454;
+}
+.home-content{
+    width: 100%;
+    padding: 3px;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+
+.car-image{
+    width: 100%;
+    position: relative;
+}
+.card-content{
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 10px;
+}
+.icon{
+    width: 15px;
+    height: 15px;
+}
+.title-span{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* text-align: end; */
+}
+.bold-title{
+    font-weight: 600;
+
+}
+a {
+    text-decoration: none;
+
+}
+.ratings{
+    font-size: 10px;
+}
+.rating-p{
+    margin: 0px;
+}
+.location{
+    margin: 0px;
+}
+.title{
+    font-size: 16px;
+    margin: 10px 0px;
+}
+.card-content span a:first-child{
+    text-decoration: none;
+    color: #282727;
+}
+.lower-title{
+    font-weight: 300;
+
+}
+.price-tag{
+    font-weight: 500;
+    color: brown;
+    font-size: 14px;
+}

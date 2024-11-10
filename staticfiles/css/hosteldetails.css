@@ -1,0 +1,243 @@
+*,
+::before,
+::after{
+    box-sizing: border-box;
+  background-color: #F1F1F1;
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+}
+.font-sora{
+    font-family: "Sora", system-ui;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.breadcrumb{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+.icons,.prev-icon{
+    width: 15px;
+    height: 15px;
+}
+.hostel-media-box{
+    width: 100%;
+    aspect-ratio: 1/1;
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    overflow: hidden;
+}
+/* .hostel-media-box img{
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease;
+} */
+.hostel-media-box img.hidden{
+    opacity: 0;
+}
+
+.m-image{
+    position: relative;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease;
+    /* border: 1px solid green; */
+}
+#hostel-details-container{
+    padding: 10px;
+    min-height: 100dvh;
+
+}
+.utilities{
+    justify-content: space-around;
+}
+.utility-box{
+    margin: 10px 0px;
+    padding: 5px;
+    background-color: #D6D4CF;
+    border-radius: 9px;
+    justify-content: space-between;
+}
+.utility-box span svg{
+    background-color: #D6D4CF;
+}
+.utility-box p{
+    margin: 5px;
+    background-color: #D6D4CF;
+   font-weight: 400;
+   font-size: 11.89px;
+   color: #282727;
+}
+.flex{
+    display: flex;
+    align-items: center;
+}
+.util-img{
+    width: 20px;
+    height: 20px;
+}
+.hostel-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+.hostel-info div p:nth-of-type(1){
+    font-weight: 600;
+    font-size: 14px;
+    color: #282727;
+    margin: 5px 0px;
+}
+.hostel-info div p:nth-of-type(2){
+    font-weight: 400;
+    font-size: 12px;
+    color: #282727;
+    margin: 5px;
+
+}
+.p-y{
+    font-weight: 600;
+}
+.yr{
+    font-size: 10px;
+}
+.price-tag{
+    font-size: 14px;
+    color: #863A0A;
+}
+.hostel-thumbnails{
+    margin: 20px 0px;
+}
+.scrollable{
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    gap: 10px;
+}
+.t-img{
+    min-width: 20%;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 5px 0px;
+}
+.t-img img{
+    width: 100%;
+    height: 100%;
+}
+.full-description{
+    display: none;
+}
+.toggle-link{
+    cursor: pointer;
+    color: #863A0A;
+}
+a{
+    text-decoration: none;
+}
+.full-description {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 2s ease-in-out;
+}
+
+.full-description.expanded {
+    display: inline-block;
+    max-height: 500px;
+}
+.short-description ,.full-description{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: 12px;
+    font-style: normal;
+    color: #52504B;
+    line-height: 22.2px;
+    text-align: left;
+    padding: 0px 5px;
+}
+.description-box{
+    margin: 2rem 0rem;
+}
+.my-border{
+    border: 1px solid black;
+
+}
+.description-box p{
+    width: 90%;
+    margin: 5px 0px;
+}
+.description-box h2{
+    margin: 5px 0px;
+    font-weight: 600;
+    font-size: 12px;
+    color: #282727;
+}
+.select-btn{
+    width: inherit;
+    padding: 15px;
+    background-color: #863A0A;
+    border-radius: 5px;
+    text-align: center;
+    justify-content: center;
+    margin: 1.5rem 0rem;
+}
+#select-available-rooms{
+    border: none;
+    background-color: #863A0A;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.st0{
+    fill:none;
+    stroke:#000000;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:10;
+}
+#Icons.st0{
+    background-color:#D6D4CF;
+}
+.not-expanded{
+    display: none;
+}
+.hostel-head-icons{
+    width: 25px;
+    height: 25px;
+}
+ul{
+   padding-left: 20px;
+   margin: 5px 0px;
+}
+li{
+    list-style: disc;
+    font-weight: 400;
+    font-size: 12px;
+}
+li::marker{
+    color: #863A0A;
+    font-size: 1rem;
+}
+.other-header{
+   justify-content: space-between;
+}
+.other-header h2{
+    font-weight: 600;
+    font-size: 13px;
+}
+#other-content{
+    width: 100%;
+    opacity: 1;
+    overflow: hidden;
+    transition: height 0.5s ease, opacity 0.5s ease;
+}
