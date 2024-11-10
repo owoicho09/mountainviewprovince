@@ -169,7 +169,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Correct this to 'staticfiles' or another directory name
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # Directory where your static files are located
+    os.path.join(BASE_DIR, 'static'),  # Directory where your static files are located
 ]
 
 
