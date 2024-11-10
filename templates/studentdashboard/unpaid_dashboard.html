@@ -1,0 +1,251 @@
+{% load static %}
+{% load humanize %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Mountainviewprovince.com</title>
+</head>
+<body>
+    <div class="home-container">
+        <nav >
+            <div class="mobile-nav">
+                <span class="nav-ham">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="nav-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </span>
+                <a href="{% url 'studentauth:profile'  %}"  target="_blank">
+
+                <span class="prof-pic">
+
+                    <img src="{{user.profile.image.url}}" alt="profile picture">
+
+                </span>
+                </a>
+
+            </div>
+        </nav>
+        <section class="persona">
+            <div class="persona-heading">
+                <p> Hello <span>{{request.user.fullname}}</span></p>
+                <h6>How are you doing today?</h6>
+            </div>
+            <div class="bts-card-capsule">
+                <div class="left-cap">
+                    <div id="left-container">
+                        <p>Back to School Special Booking Offer</p>
+                        <a href="{% url 'hostel:index'%}">
+
+                        <button class="gs-button">
+                            Get Started
+                        </button>
+
+                        </a>
+                    </div>
+                </div>
+                <div class="right-cap">
+
+                    <img src="{% static 'images/bts.png' %}" alt="student's image" loading="lazy" class="bts-image">
+                </div>
+            </div>
+        </section>
+
+        <section class="recom-section">
+            <h2>Recommended</h2>
+            <div id="card-row">
+            <a href="{% url 'hostel:room_type_page' premium_hostel.hostel.hid %}">
+
+                <div class="card">
+                    <div class="car-image-box">
+                        <img class="recom-img" src="{% static 'images/PREMIUM-EXECUTIVE-SINGLE-ROOM-B-1.webp' %}" alt="hostel's images" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <span class="title-span">
+                            <p class="bold-title title"> {{premium_hostel.type}} Room </p>
+                        </span>
+
+                        <p class="location">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icons">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                                </svg>
+                            </span>
+                            45, Ridge Street, Eclipse Road</p>
+
+                        </span>
+
+                        {% if school|lower == 'baze' %}
+                            <p class="p-y"><span class="price-tag">₦{{ premium_hostel.baze_price|intcomma }}</span>/Semester</p>
+                        {% else %}
+                            <p class="p-y"><span class="price-tag">₦{{ premium_hostel.semester_rate|intcomma }}</span>/Semester</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </a>
+
+            <a href="{% url 'hostel:room_type_page' premium_hostel.hostel.hid %}">
+
+                <div class="card">
+                    <div class="car-image-box">
+                        <img class="recom-img" src="{% static 'images/ROOM-OF-2-C-1.webp' %}" alt="hostel's images" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <span class="title-span">
+                            <p class="bold-title title">{{ executive_room_of_two.type }} </p>
+                        </span>
+                        <p class="location">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icons">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                                </svg>
+                            </span>
+                            45, Ridge Street, Eclipse Road</p>
+                        </span>
+
+                         {% if school|lower == 'baze' %}
+                            <p class="p-y"><span class="price-tag">₦{{ executive_room_of_two.baze_price|intcomma }}</span>/Semester</p>
+                        {% else %}
+                            <p class="p-y"><span class="price-tag">₦{{ executive_room_of_two.semester_rate|intcomma }}</span>/Semester</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+
+            <a href="{% url 'hostel:room_type_page' premium_hostel.hostel.hid %}">
+
+                <div class="card">
+                    <div class="car-image-box">
+                        <img class="recom-img" src="{% static 'images/EXECUTIVE-SINGLE-ROOM-B-1.webp' %}" alt="hostel's images" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <span class="title-span">
+                            <p class="bold-title title">{{executive_single_room.type}}</p>
+                        </span>
+                        <p class="location">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icons">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                                </svg>
+                            </span>
+                            45, Ridge Street, Eclipse Road</p>
+                        </span>
+                        {% if school|lower == 'baze' %}
+                            <p class="p-y"><span class="price-tag">₦{{ executive_single_room.baze_price|intcomma }}</span>/Semester</p>
+                        {% else %}
+                            <p class="p-y"><span class="price-tag">₦{{ executive_single_room.semester_rate|intcomma }}</span>/Semester</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+            </div>
+        </section>
+
+
+        <section class="rated-section">
+            <div class="r-head">
+                <h2 class="r-title"> Top Rated</h2>
+                <p><a href="#">See all</a></p>
+            </div>
+
+            <div class="rated-rows">
+                 <div class="rated-row-1">
+                    <div class="rated-card">
+                        <div class="card-image-box">
+                            <img class="rated-img" src="{% static 'images/hostel-card-img.png' %}" alt="hostel's images" loading="lazy">
+                        </div>
+                        <a href="{% url 'hostel:detail_page' slug='white-house' %}">
+                        <div class="r-card-content">
+                            <span class="title-span">
+                                <p class="bold-title title">White House Hostel & Lodge </p>
+                            </span>
+                            <p class="location">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icons">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                                    </svg>
+                                </span>
+                                45, Ridge Street, Eclipse Road</p>
+                            </span>
+                            <p class="p-y"><span class="price-tag">#180,000</span>/year</p>
+                        </div>
+                            </a>
+                    </div>
+
+
+
+
+
+                    <div class="rated-card">
+                        <div class="card-image-box">
+                            <img class="rated-img" src="{% static 'images/hostel-media-m.png' %}" alt="hostel's images" loading="lazy">
+                        </div>
+                        <a href="{% url 'hostel:detail_page' slug='jabi-hostel' %}">
+
+                        <div class="r-card-content">
+                            <span class="title-span">
+                                <p class="bold-title title">Arcade Hostel & Lodge </p>
+                            </span>
+                            <p class="location">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icons">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                                    </svg>
+                                </span>
+                                45, Ridge Street, Eclipse Road</p>
+                            </span>
+                            <p class="p-y"><span class="price-tag">#180,000</span>/year</p>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="rated-card">
+                        <div class="card-image-box">
+                            <img class="rated-img" src="{% static 'images/image.png' %}" alt="hostel's images" loading="lazy">
+                        </div>
+                        <a href="{% url 'hostel:detail_page' slug='katampe-hostel-boys-only' %}">
+
+                        <div class="r-card-content">
+                            <span class="title-span">
+                                <p class="bold-title title">Katampe Hostel & Lodge </p>
+                            </span>
+                            <p class="location">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icons">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                                    </svg>
+                                </span>
+                                45, Ridge Street, Eclipse Road</p>
+                            </span>
+                            <p class="p-y"><span class="price-tag">#180,000</span>/year</p>
+                        </div>
+                        </a>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+            <a href="{% url 'studentauth:logout'  %}">logout</a>
+
+        </section>
+    </div>
+
+</body>
+            <script src="{% static 'scripts/custom.js' %}"></script>
+
+</html>

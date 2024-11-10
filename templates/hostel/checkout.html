@@ -1,0 +1,178 @@
+{% load static %}
+{% load humanize %}
+{% load number_to_word %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bookingsummary.css' %}">
+
+    <title>Mountainviewprovince.com</title>
+</head>
+<body>
+    <div class="booking-summary-container">
+        <div class="breadcrumb font-sora">
+            <a href="javascript:history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="prev-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+            </a>
+            <p> Booking Summary </p>
+        </div>
+
+        <section id="selected-hostel">
+            <div>
+                <img class="selected-img" src="{% static 'images/hostel-card-img.png' %}" alt="hostel's image" loading="lazy">
+            </div>
+            <div class="booked-details">
+                <p class="hos-name">{{booking.hostel}}</p>
+                <p class="location">
+                    <span>
+                       <img class="icons" src="{% static 'images/location.png' %}" alt="location icon">
+                    </span>
+                    {{booking.hostel.address}}
+                </p>
+            </div>
+        </section>
+        <section id="room-details">
+            <h2> Room Details </h2>
+            <div class="room-details-content">
+                <div id="room-no">
+                    <p>Room number</p>
+                    <p> {{booking.room.room_number}}</p>
+                </div>
+                <div id="n-bed">
+                    <p>No of Bed</p>
+                    <p>{{ booking.room.capacity|number_to_words|title }} ({{booking.room.capacity}})</p>
+                </div>
+                <div id="room-cat">
+                    <p>Room Category</p>
+                    <p>{{booking.hostel_type}}</p>
+                </div>
+                <div id="b-rate">
+                    <p>Booking Rate</p>
+                    <p>{{booking.rate_type}}</p>
+                </div>
+            </div>
+        </section>
+        <section id="payment-details">
+            <h2> Payment Details </h2>
+            <div class="payment-details-content">
+                <div id="total-pay">
+                    {% if school == 'baze' %}
+
+                    <p>&#8358 <span class="price">{{ booking.hostel_type.baze_price }}</span></p>
+                     {% else %}
+                    <p><strong>Rate Type :</strong> {{ booking.rate_type|title }}</p>
+                        <p> &#8358<span class="price"> {{ booking.rate_price|intcomma }}</span></p>
+
+                    {% endif %}
+
+                </div>
+
+                <div id="sf">
+                    <p>Service Fee</p>
+                    <p>&#8358 <span class="service-charge">500</span></p>
+                </div>
+                <hr class="divider">
+                <div id="grand-total">
+                    <p>TOTAL PAYMENT</p>
+                    <p>&#8358 <span class="result">
+
+                    </span> </p>
+                </div>
+            </div>
+        </section>
+        <section id="payment-method">
+            <h2>Payment Method</h2>
+            <div id="payment-options">
+
+
+
+                <form method="POST" id="forFlutter" class="pay-form" action="https://checkout.flutterwave.com/v3/hosted/pay">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="public_key" value="FLWPUBK_TEST-02b9b5fc6406bd4a41c3ff141cc45e93-X" />
+                    <input type="hidden" name="customer[email]" value="{{ booking.email }}" />
+                    <input type="hidden" name="customer[name]" value="{{ booking.fullname }}" />
+                    <input type="hidden" name="tx_ref" value="ID-{{ booking.booking_id }}" />
+
+                    {% if school == 'baze' %}
+                        <input type="hidden" name="amount" value="{{ booking.hostel_type.baze_price }}" />
+                    {% else %}
+                        <input type="hidden" name="amount" value="{{ booking.rate_price }}" />
+                    {% endif %}
+
+                    <input type="hidden" name="currency" value="NGN" />
+                    <input type="hidden" name="redirect_url" value="https://c603-102-91-93-116.ngrok-free.app/success/{{booking.booking_id}}/?success_id={{booking.success_id}}&booking_total= {% if school == 'baze' %}{{ booking.hostel_type.baze_price }}{% else %}{{ booking.rate_price }}{% endif %}" />
+
+                    <button type="submit" class="proceed-btn" id="flutterBtn">
+                        <img src="{% static 'images/flutterwave.png' %}" alt="flutterwave logo">
+                    </button>
+                </form>
+
+                <form method="post" action="{% url 'hostel:initialize_payment' %}" id="forRemmita" class="pay-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="name" value="{{booking.fullname}}">
+                    <input type="hidden" name="email" value="{{booking.email}}">
+                    <input type="hidden" name="phone" value="{{booking.phone}}">
+
+                     {% if school == 'baze' %}
+                        <input type="hidden" name="amount" value="{{ booking.hostel_type.baze_price }}" />
+                    {% else %}
+                        <input type="hidden" name="amount" value="{{ booking.rate_price }}" />
+                    {% endif %}
+                   <button type="submit" class="proceed-btn" id="RemmitaBtn">
+                        <img src="{% static 'images/remita.png' %}" alt="flutterwave logo">
+                    </button>
+                </form>
+                    <button onclick="makePaystackPayment()"  class="proceed-btn" id="pStackBtn">
+                        <img src="{% static 'images/paystack.png' %}" alt="flutterwave logo">
+                    </button>            </div>
+        </section>
+
+
+        <!-- <div class="button-section ">
+            <button type="submit" id="p-to-pay" class="font-sora">Proceed to pay </button>
+        </div>-->
+    </div>
+
+
+         <!-- Payment Forms -->
+                           </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://js.paystack.co/v2/inline.js"></script>
+
+<script>
+function makePaystackPayment() {
+    const paystack = new PaystackPop()
+
+    paystack.newTransaction({
+        key: '{{paystack_public_key}}',
+        email: '{{ booking.email }}',
+        amount: {% if school == 'baze' %}{{ booking.hostel_type.baze_price }}{% else %}{{ booking.rate_price }}{% endif %} * 100,
+
+        onSuccess: (transaction) => {
+            console.log(transaction);
+            window.location.href = "/success/{{ booking.booking_id }}/?success_id={{ booking.success_id }}&booking_total={{ booking.rate_price }}"
+        },
+
+        onCancel: () => {
+            Swal.fire({
+                title: 'Payment Cancelled',
+                icon: 'error',
+            })
+        }
+    });
+}
+</script>
+
+            <script src="{% static 'scripts/bookingSummary.js' %}"></script>
+</body>
+</html>

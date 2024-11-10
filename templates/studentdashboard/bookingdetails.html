@@ -1,0 +1,76 @@
+{% load static %}
+{% load humanize %}
+{% load number_to_word %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bookingdetails.css' %}">
+    <title>Mountainviewprovince.com</title>
+</head>
+<body>
+    <div id="booking-detail-container " >
+        <div class="breadcrumb">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="prev-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+            <p> Booking Details</p>
+        </div>
+        <section id="selected-hostel">
+            <div>
+                <img class="selected-img" src="{% static 'images/booked-img.png' %}" alt="hostel's image" loading="lazy">
+            </div>
+            <div class="booked-details">
+                <p class="hos-name">{{booking.hostel}}</p>
+                <p class="booking">Booking ID: <span class="booking-id">{{booking.booking_id}}</span></p>
+            </div>
+        </section>
+        <section id="room-details">
+            <h2> Room Details </h2>
+            <div class="room-details-content">
+                <div id="room-no">
+                    <p>Room number</p>
+                    <p>Room {{booking.room.room_number}}</p>
+                </div>
+                <div id="n-bed">
+                    <p>No of Bed</p>
+                    <p>Three({{booking.room.capacity}})</p>
+                </div>
+                <div id="room-cat">
+                    <p>Room Category</p>
+                    <p>{{booking.hostel_type}}</p>
+                </div>
+                <div id="b-rate">
+                    <p>Booking Rate</p>
+                    <p>{{booking.rate_type}}</p>
+                </div>
+            </div>
+        </section>
+        <section id="payment-details">
+            <h2> Payment Details </h2>
+            <div class="payment-details-content">
+                <div id="total-pay">
+                    <p>Total Payment</p>
+                    <p>&#8358 {{booking.rate_price|intcomma}}</p>
+                </div>
+                <div id="pay-date">
+                    <p>Payment Date</p>
+                    <p>{{booking.date}}</p>
+                </div>
+                <!--<div id="pay-method">
+                    <p>Payment Method</p>
+                    <p>#755,000</p>
+                </div>-->
+                <div id="pay-status">
+                    <p>Pay Status</p>
+                    <p>{{booking.payment_status}}</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

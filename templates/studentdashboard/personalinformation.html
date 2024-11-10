@@ -1,0 +1,46 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/personalinformation.css' %}">
+    <title>Mountainviewprovince.com</title>
+</head>
+<body>
+    <div class="p-info-container font-sora">
+        <div class="breadcrumb font-sora">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="prev-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+            <p> Personal Information </p>
+        </div>
+        <div class="p-p">
+            <img src="{{profile.image.url}}" alt="profile picture">
+        </div>
+        <div class="form-group">
+            <label for="student's-name">Student's name</label>
+            <span class="font-sora"  id="stu-name" >{{profile.fullname}}</span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <span class="font-sora"  id="stu-name" >{{profile.email}}</span>
+        </div>
+        <div class="form-group">
+            <label for="phone-number">Phone number</label>
+            <span class="font-sora"  id="stu-name" >{{profile.phone}}</span>
+        </div>
+        <div class="form-group">
+            <label for="institution">Institution</label>
+            <span class="font-sora"  id="stu-name" >{{request.user.school}} University</span>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

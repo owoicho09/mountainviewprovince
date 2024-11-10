@@ -1,0 +1,13 @@
+<form method="post" action="{% url 'hostel:initialize_payment' %}">
+    {% csrf_token %}
+    <input type="hidden" name="name" value="{{ booking.fullname }}">
+    <input type="hidden" name="email" value="{{ booking.email }}">
+    <input type="hidden" name="phone" value="{{ booking.phone }}">
+
+    {% if school == 'baze' %}
+        <input type="hidden" name="amount" value="{{ booking.hostel_type.hostel.price }}" />
+    {% else %}
+        <input type="hidden" name="amount" value="{{ booking.rate_price }}" />
+    {% endif %}
+    <button type="submit">Pay with Remita</button>
+</form>

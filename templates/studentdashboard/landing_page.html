@@ -1,0 +1,459 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="{% static 'css/landingpage.css' %}">
+
+    <title>Mountainviewprovince.com</title>
+</head>
+<body>
+    <!-- <span id="scroll-progress"></span> -->
+    <div id="m-container" class="w-full">
+        <nav>
+            <div class="flex nav-holder">
+                <div class="img-holder">
+                    <a href="index.html">
+                        <img src="{% static 'images/mvplogo.svg' %}" alt="mvp icon">
+                    </a>
+                </div>
+                <div class="nav-icon">
+                    <img class="n-icon" src="{% static 'images/hamburger-svgrepo-com.svg' %}">
+                </div>
+            </div>
+        </nav>
+        <!-- open navigation -->
+        <div class="not-visible open-nav">
+            <div class="flex nav-holder">
+                <div class="img-holder">
+                    <a href="#">
+                        <img src="{% static 'images/mvplogo.svg' %}" alt="mvp icon">
+                    </a>
+                </div>
+                <div class="nav-icon">
+                    <img class="close-icon n-icon" src="{% static 'images/close-square.svg' %}" alt="navogtion close icon">
+                </div>
+            </div>
+            <div class="open-nav-link">
+                <a href="#">About Us</a>
+                <a href="#">Bookings</a>
+                <a href="#">Blog and news</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <a href="{% url 'studentauth:register' %}">
+            <button class="get-started">Get started</button>
+            </a>
+        </div>
+        <div class="flex flex-c">
+            <span class="header-span">10% Discounts on first time booking</span>
+            <div class="hero-intro flex flex-c w-full">
+                <p> Book & enjoy the best and
+                    <span class="brown-text">affordable accomodation</span>
+                </p>
+                <p>Get to book and enjoy luxury hostels booking easily and conviniently</p>
+                <a href="{% url 'studentauth:register' %}">
+                <button class="get-started">Get started</button>
+                </a>
+            </div>
+            <div class="image-flask w-full">
+                <div class="flex flask  gap-10">
+                    <div class="left-image">
+                        <img src="{% static 'images/landing-01.png' %}" alt="school's image">
+                    </div>
+                    <div class="r-box flex flex-c h-full gap-7">
+                        <div class="top-right w-full">
+                            <img src="{% static 'images/landing-02.png' %}" alt="school's image">
+                        </div>
+                        <div class="bottom-right w-full">
+                            <img src="{% static 'images/landing-03.png' %}" alt="school's image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="banner-collection w-full">
+                <div class="banner-flex" id="m-banner-holder">
+                    <span class="b-button">
+                        <img src="{% static 'images/landing-btn.svg' %}" alt="icon showing the number of hostelers">
+                    </span>
+                    <span class="middle-image">
+                        <img src="{% static 'images/middle-img-01.svg' %}" alt="MVP icon">
+                    </span>
+                    <span class="middle-image">
+                        <img src="{% static 'images/middle-img-02.svg' %}" alt="MVP icon">
+                    </span>
+                    <span class="b-button">
+                        <img src="{% static 'images/landing-btn-2.svg' %}" alt="icon showing the number of hostelers">
+                    </span>
+                </div>
+            </div>
+            <section id="trusted-section">
+                <div class="trusted-bar">
+                    <p>YOUR TRUSTED <span class="brown-text">MVP</span></p>
+                    <p class="brown-text">SINCE 2018</p>
+                    <p>
+                        Mountain View Province (MVP), formerly known
+                        as Mountain View Palace, is a private student hostel
+                        solution, where nature and affluence speak at its peak. It is
+                        powered by “Afri-Kard Integrated Solutions International” (one of the Promoters of Hall of Malls Inc.) strategically
+                        located in Diplomatic Zone, Katampe Extension Abuja.
+                        It is an off-campus hostel accommodation.
+
+                    </p>
+                    <button id="learn-more"> Learn more </button>
+                </div>
+            </section>
+            <section id="gallery w-full" class="m-gallery">
+                <div class="flex flex-c w-full mt-large">
+                    <div class="gallery-img">
+                      <img src="{% static 'images/gallery-img-01.png' %}" alt="school image">
+                      <span class="img-info">
+                        <p>MOUNTAIN VIEW</p>
+                        <p>PROVINCE PHASE 2</p>
+                      </span>
+                    </div>
+                </div>
+                <div class="flex flex-c w-full mt-large">
+                    <div class="gallery-img">
+                      <img src="{% static 'images/province-phase-3.png' %}" alt="school image">
+                      <span class="img-info">
+                        <p>MOUNTAIN VIEW</p>
+                        <p>PROVINCE PHASE 3</p>
+                      </span>
+                    </div>
+                </div>
+                <div class="flex flex-c w-full mt-large">
+                    <div class="gallery-img">
+                      <img src="{% static 'images/white-house.png' %}" alt="school image">
+                      <span class="img-info">
+                        <p>MOUNTAIN VIEW</p>
+                        <p>WHITE HOUSE</p>
+                      </span>
+                    </div>
+                </div>
+                <div class="flex flex-c w-full mt-large">
+                    <div class="gallery-img">
+                      <img src="{% static 'images/province-arcade.png' %}" alt="school image">
+                      <span class="img-info">
+                        <p>MOUNTAIN VIEW</p>
+                        <p>PROVINCE ARCADE</p>
+                      </span>
+                    </div>
+                </div>
+            </section>
+            <section id="discoverSection" class="flex flex-c">
+                <div class="discover-texts">
+                    <p>Discover Your <span class="brown-text">Perfect</span></p>
+                    <p class="brown-text">Room Match</p>
+                    <p>
+                        Find the ideal space for your off-campus stay with ease.
+                        From cozy single rooms to spacious shared options, we
+                        help you discover the perfect room that suits your lifestyle
+                        and preferences.
+                    </p>
+                </div>
+                <div class="carousel-box w-full">
+                    <div class="c-1">
+                        <div class="hostel-box">
+                            <img src="{% static 'images/hostel-media-m.png' %}" alt="hostel's image">
+                            <div class="hostel-details">
+                                <span class="flex s-b">
+                                    <p>$285,000</p>
+                                    <img src="{% static 'images/exploreicon.svg' %}" alt="explore icon">
+                                </span>
+                                <p class="hostel-det-t">Premium Executive</p>
+                                <p class="hostel-det-t">Single Room</p>
+                            </div>
+                        </div>
+                        <div class="hostel-box">
+                            <img src="{% static 'images/PREMIUM-EXECUTIVE-SINGLE-ROOM-A.webp' %}" alt="hostel's image">
+                            <div class="hostel-details">
+                                <span class="flex s-b">
+                                    <p>$285,000</p>
+                                    <img src="{% static 'images/exploreicon.svg' %}" alt="explore icon">
+                                </span>
+                                <p class="hostel-det-t">Premium Executive</p>
+                                <p class="hostel-det-t">Single Room</p>
+                            </div>
+                        </div>
+                        <div class="hostel-box">
+                            <img src="{% static 'images/hostel-media-m.png' %}" alt="hostel's image">
+                            <div class="hostel-details">
+                                <span class="flex s-b">
+                                    <p>$285,000</p>
+                                    <img src="{% static 'images/exploreicon.svg' %}" alt="explore icon">
+                                </span>
+                                <p class="hostel-det-t">Premium Executive</p>
+                                <p class="hostel-det-t">Single Room</p>
+                            </div>
+                        </div>
+                        <div class="hostel-box">
+                            <img src="{% static 'images/PREMIUM-EXECUTIVE-SINGLE-ROOM-B-1.webp' %}" alt="hostel's image">
+                            <div class="hostel-details">
+                                <span class="flex s-b">
+                                    <p>$285,000</p>
+                                    <img src="{% static 'images/exploreicon.svg' %}" alt="explore icon">
+                                </span>
+                                <p class="hostel-det-t">Premium Executive</p>
+                                <p class="hostel-det-t">Single Room</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-2">
+                        <div class="hostel-box">
+                            <img src="{% static 'images/ROOM-OF-2-C-1.webp' %}" alt="hostel's image">
+                            <div class="hostel-details">
+                                <span class="flex s-b">
+                                    <p>$285,000</p>
+                                    <img src="{% static 'images/exploreicon.svg' %}" alt="explore icon">
+                                </span>
+                                <p class="hostel-det-t">Executive</p>
+                                <p class="hostel-det-t">Room Of Two</p>
+                            </div>
+                        </div>
+                        <div class="hostel-box">
+                            <img src="{% static 'images/room of 3.webp' %}" alt="hostel's image">
+                            <div class="hostel-details">
+                                <span class="flex s-b">
+                                    <p>$285,000</p>
+                                    <img src="{% static 'images/exploreicon.svg' %}" alt="explore icon">
+                                </span>
+                                <p class="hostel-det-t">Standard</p>
+                                <p class="hostel-det-t">Room Of Three</p>
+                            </div>
+                        </div>
+                        <div class="hostel-box">
+                            <img src="{% static 'images/roomof2.webp' %}" alt="hostel's image">
+                            <div class="hostel-details">
+                                <span class="flex s-b">
+                                    <p>$285,000</p>
+                                    <img src="{% static 'images/exploreicon.svg' %}" alt="explore icon">
+                                </span>
+                                <p class="hostel-det-t">Premium Executive</p>
+                                <p class="hostel-det-t">Room Of Two</p>
+                            </div>
+                        </div>
+                        <div class="hostel-box">
+                            <img src="{% static 'images/hostel-media-m.png' %}" alt="hostel's image">
+                            <div class="hostel-details">
+                                <span class="flex s-b">
+                                    <p>$285,000</p>
+                                    <img src="{% static 'images/exploreicon.svg' %}" alt="explore icon">
+                                </span>
+                                <p class="hostel-det-t">Premium Executive</p>
+                                <p class="hostel-det-t">Single Room</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'studentauth:register' %}">
+
+                <button id="start-booking">
+                    Start Booking now
+                </button>
+                </a>
+            </section>
+            <section id="amazingService" class="w-full mt-large">
+                <div class="amazingHolder w-full">
+                    <p>Explores <span class="brown-text">Amazing</span> </p>
+                    <p><span class="brown-text">services</span> we offer</p>
+                </div>
+                <div id="services-box">
+                    <div class="service-b mb-26">
+                       <div class="s-icon-holder">
+                         <img src="{% static 'images/power-supply.svg' %}" alt="power icon">
+                      </div>
+                        <p class="s-header">STANBY POWER SUPPLY</p>
+                        <P class="s-text"> Enjoy 24/7 uninterrupted comfort with our standby
+                             power supply with no outages to ensure reliable living
+                            experiences.
+                        </P>
+                    </div>
+                    <div class="service-b mb-26">
+                       <div class="s-icon-holder">
+                         <img src="{% static 'images/wallet.svg' %}" alt="wallet icon">
+                      </div>
+                        <p class="s-header">FLEXIBLE PAYMENT PLANS</p>
+                        <P class="s-text">We offer easy and flexible payments plans for you to ease your bookings on the platform. (Terms & Conditions
+                            apply)
+                        </P>
+                    </div>
+                    <div class="service-b mb-26">
+                       <div class="s-icon-holder">
+                         <img src="{% static 'images/lamp.svg' %}" alt="lamp icon">
+                      </div>
+                        <p class="s-header">READING FACILITY</p>
+                        <P class="s-text"> Quiet, comfortable spaces designed for focused study and relaxation
+                        </P>
+                    </div>
+                    <div class="service-b mb-26">
+                       <div class="s-icon-holder">
+                         <img src="{% static 'images/surfing.svg' %}" alt="wiFi icon">
+                      </div>
+                        <p class="s-header">INTERNET FACILITY (WI-FI)</p>
+                        <P class="s-text">
+                            Stay connected with high-speed internet access to enhance learning, research work and general productivity
+                        </P>
+                    </div>
+                    <div class="service-b mb-26">
+                       <div class="s-icon-holder">
+                         <img src="{% static 'images/transport.svg' %}" alt="wheel icon">
+                      </div>
+                        <p class="s-header">TRANSPORTATION</p>
+                        <P class="s-text"> Scheduled executive transport options to get you around the campus with ease and convinience
+                        </P>
+                    </div>
+
+                </div>
+            </section>
+            <section class="what-stu-says w-full">
+                <p class="r-header"> What student <span class="brown-text">says</span></p>
+                <p class="brown-text r-header"> about MVP </p>
+                <div class="review-gallery">
+                    <div class="flex r-img-holder">
+                        <img src="{% static 'images/student-1.png' %}" alt="student's image">
+                        <img src="{% static 'images/student-2.png' %}" alt="student's image">
+                        <img src="{% static 'images/student-3.png' %}" alt="student's image">
+                    </div>
+                    <div class="r-holder flex">
+                        <img src="{% static 'images/quote.svg' %}" alt="quote icon">
+                        <span>
+                            <p>Josephine Balogun</p>
+                            <p>Nile University student</p>
+                        </span>
+                    </div>
+                </div>
+                <div class="review-t">
+                    <p>
+                        This text here is a dummy text of what is supposed to
+                        be here which is a short comment of a review written
+                        by one of the student.
+                    </p>
+                </div>
+            </section>
+            <section class="news-section" class="w-full">
+                <p class="n-header">Read <span class="brown-text">from MVP</span></p>
+                <p class="brown-text n-header">Newsletter</p>
+                <div class="flex flex-c flex-start n-card-holder">
+                    <div class="news-card mb-19">
+                        <span>
+                            <img src="{% static 'images/news-img-01.png' %}" alt="school's image">
+                        </span>
+                        <span class="news-t">
+                            <p>12pm, November 12</p>
+                            <p>Off Campus Accommodation Tips</p>
+                            <p>This text here is a dummy text of what is
+                                supposed to be written here that is a short
+                                sample of the news...
+                            </p>
+                        </span>
+                    </div>
+                    <div class="news-card mt-19">
+                        <span>
+                            <img src="{% static 'images/news-img-02.png' %}" alt="image of a girl in hijab">
+                        </span>
+                        <span class="news-t">
+                            <p>12pm, November 12</p>
+                            <p>2018 Eid-Maulud Celebration</p>
+                            <p>This text here is a dummy text of what is
+                                supposed to be written here that is a short
+                                sample of the news...
+                            </p>
+                        </span>
+                    </div>
+
+                </div>
+                <button id="read-more">
+                    Read more news
+                </button>
+
+            </section>
+            <div class="start-booking w-full">
+                <div class="booking-box w-full">
+                    <div class="b-img">
+                        <img src="{% static 'images/booking-img.png' %}" alt="image of a student">
+                    </div>
+                    <div class="booking-box-t ">
+                        <p>Studying with Conviniency</p>
+                        <p>
+                            Staying off campus shouldn’t come with stress.
+                            Get the best accommodation while you’re studying.
+                        </p>
+                        <span class="start-booking-block flex">
+                            <a href="{% url 'studentauth:register' %}">
+
+                            <p>Start Booking now</p>
+                            </a>
+                            <img src="{% static 'images/b-arrow-right.svg' %}" alt="right arrow icon">
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <section class="contact-information w-full">
+        <div class="c-info-box">
+            <p>Contact Information</p>
+            <span class="flex c-details">
+                <img class="c-icon" src="{% static 'images/location.svg' %}" alt="location icon">
+                <p>1 Mai Umaru Bubaram, Katampe Ext. FCT Abuja</p>
+            </span>
+            <span class="flex c-details">
+                <img class="c-icon" src="{% static 'images/location.svg' %}" alt="location icon">
+                <p>3 Y.P.O. Sodehinde, Off Anthony Enahoro Str.FCT Abuja</p>
+            </span>
+            <span class="flex c-details">
+                <img class="c-icon" src="{% static 'images/location.svg' %}" alt="location icon">
+                <p>Plot 832 Emmanuel Crescent, off Idris Ibrahim Cres, Jabi.</p>
+            </span>
+            <span class="flex c-details">
+                <img class="c-icon" src="{% static 'images/call-calling.svg' %}" alt="phone icon">
+                <p> +234 809 543 3353</p>
+            </span>
+            <span class="flex c-details">
+                <img class="c-icon" src="{% static 'images/call-calling.svg' %}" alt="phone icon">
+                <p>+234 809 543 3353</p>
+            </span>
+        </div>
+        <div class="social-icons-holder">
+            <span class="social-icon">
+                <img src="{% static 'images/facebook.svg' %}" alt="facebook logo">
+            </span>
+            <span class="social-icon">
+                <img src="{% static 'images/sms-edit.svg' %}" alt="sms logo">
+            </span>
+            <span class="social-icon">
+                <img src="{% static 'images/whatsapp.svg' %}" alt="whatsapp logo">
+            </span>
+            <span class="social-icon">
+                <img src="{% static 'images/youtube.svg' %}" alt="youtube logo">
+            </span>
+        </div>
+        <div class="links-holder w-full">
+            <a href="#"> About MVP </a>
+            <a href="#"> Book Now </a>
+            <a href="#"> Contact Us </a>
+            <a href="#"> Privacy Policy </a>
+            <a href="#"> Tuck Shop </a>
+            <a href="#"> Hostel Location </a>
+        </div>
+        <div class="footer-note flex">
+            <img src="{% static 'images/mvplogo.svg' %}" alt="mvp hostel icon">
+            <p>
+                MVP Hostels    ©2024
+            </p>
+        </div>
+    </section>
+    <span>
+        <svg class="scroll-to-top" id="scrollToTopBtn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+        </svg>
+    </span>
+            <script src="{% static 'scripts/index.js' %}"></script>
+</body>
+</html>

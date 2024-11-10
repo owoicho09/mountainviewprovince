@@ -1,0 +1,200 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/home-2.css' %}">
+
+    <title>Mountainviewprovince.com</title>
+</head>
+<body>
+    <div class="home-container">
+        <nav>
+            <div class="mobile-nav">
+                <span class="nav-ham">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="nav-icon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </span>
+                <a href="{% url 'studentauth:profile'  %}"  target="_blank">
+
+                <span class="prof-pic">
+                    <img src="{{user.profile.image.url}}" alt="profile picture">
+                </span>
+                </a>
+            </div>
+        </nav>
+        <section class="persona">
+            <div class="persona-heading">
+                <p> Hello <span>{{request.user.fullname}}</span></p>
+                <h6>How are you doing today?</h6>
+            </div>
+        </section>
+        <section class="current-booking">
+            <h2>Your current booking</h2>
+            <div class="flex top-banner">
+                <div class="hostel-booked flex gap-1">
+                    <img src="{{booking.hostel.image.url}}" alt="hostel booked" id="booked-img">
+                    <span class="booked-box">
+                        <p class="booked-text">{{booking.hostel.name}}</p>
+                        <span class="flex location gap-1">
+                            <svg width="14px" height="14px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+                                <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" fill="#282727"/> <path d="M12 5V3" stroke="#282727" stroke-width="2" stroke-linecap="round"/> <path d="M19 12L21 12" stroke="#282727" stroke-width="2" stroke-linecap="round"/> <path d="M12 21L12 19" stroke="#282727" stroke-width="2" stroke-linecap="round"/> <path d="M3 12H5" stroke="#282727" stroke-width="2" stroke-linecap="round"/> </g>
+
+                            </svg>
+                            <p class="location-t"> View location</p>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="m-gray-box">
+                <div class="p-x-2">
+                    <div class="hostel-item">
+                        <span class="flex gap-2 col-item">
+                            <span class="r-item-icon left-icon">
+                                <img src="{% static 'images/room-number.svg' %}" alt="key icon">
+                            </span>
+                            <div class="room-desk">
+                                <p>Room Number</p>
+                                <p class="fade"><span class="dynamic-text"> {{booking.room.room_number}}</p>
+                            </div>
+
+                        </span>
+                    </div>
+                    <div class="hostel-item">
+                        <span class="flex gap-2 col-item">
+                            <span class="r-item-icon left-icon">
+                                <img src="{% static 'images/room-type.svg' %}" alt="room icon">
+                            </span>
+                            <div class="room-desk">
+                                <p>Room Type</p>
+                                <p class="dynamic-text">{{booking.hostel_type}}</p>
+                            </div>
+
+                        </span>
+                    </div>
+                    <div class="hostel-item">
+                        <span class="flex gap-2 col-item">
+                            <span class="r-item-icon left-icon">
+                                <img src="{% static 'images/bed-type.svg' %}" alt="bed icon">
+                            </span>
+                            <div class="room-desk">
+                                <p>Number of Bed</p>
+                                <p class="dynamic-text">{{booking.room.capacity}} Bed</p>
+                            </div>
+
+                        </span>
+                    </div>
+                    <div class="hostel-item">
+                        <span class="flex gap-2 col-item">
+                            <span class="r-item-icon left-icon">
+                                <img src="{% static 'images/clock.svg' %}" alt="clock icon">
+                            </span>
+                            <div class="room-desk">
+                                <p>Date Paid</p>
+                                <p class="dynamic-text"> {{booking.date}}</p>
+                            </div>
+
+                        </span>
+                    </div>
+                </div>
+                <div id="request-section">
+                    <div class="req-box gap-1">
+                        <p> Submit Reviews/Ratings</p>
+                        <span>
+                            <img src="{% static 'images/arrow-right.svg' %}" alt="add icon">
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="m-request">
+            <h2>Maintenance Request</h2>
+            <div class="m-gray-box m-box">
+                <div id="request-chambers" class="flex">
+                    <div class="left-cut flex">
+                        <span>
+                            <img class="maint-img" src="{% static 'images/profile-icon.svg' %}" alt="maintenance image logo">
+                        </span>
+                        <span>
+                            <p>Broken Faucet Repair</p>
+                            <p>Ticket ID: <span>4356709</span></p>
+                        </span>
+                    </div>
+                    <div class="status-holder">
+                        <img class="status-icon" src="{% static 'images/pending.svg' %}" alt="pending icon">
+                        <img class="status-icon not-active" src="images/{% static 'images/completed-icon.svg' %}" alt="completed icon">
+                    </div>
+                </div>
+                <div id="request-chambers" class="flex">
+                    <div class="left-cut flex">
+                        <span>
+                            <img class="maint-img" src="{% static 'images/profile-icon.svg' %}" alt="maintenance image logo">
+                        </span>
+                        <span>
+                            <p>Broken Door Knob</p>
+                            <p>Ticket ID: <span>43500709</span></p>
+                        </span>
+                    </div>
+                    <div class="status-holder">
+                        <img class="status-icon" src="{% static 'images/completed-icon.svg' %}" alt="pending icon">
+                        <img class="status-icon not-active" src="" alt="completed icon">
+                    </div>
+                </div>
+                <div id="request-section">
+                    <div class="req-box gap-1">
+                        <p> Make new request</p>
+                        <span>
+                            <img src="{% static 'images/add.svg' %}" alt="add icon">
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="m-request">
+            <h2> Recent Notifications</h2>
+            <div class="m-gray-box m-box">
+                {% for n in notifications %}
+                <div id="request-chambers" class="flex">
+                    <div class="notification-area flex">
+                        <span>
+                            <img class="maint-img" src="{% static 'images/alert-icon.svg' %}" alt="maintenance image logo">
+                        </span>
+
+                        <span>
+                            <p>Rent payment notification</p>
+                            <p>Booking confirmed, Your booking id: {{n.booking.booking_id}}<span class="req-completed"><img class="status-icon" src="{% static 'images/completed-icon.svg' %}" alt="pending icon"></span></p>
+                        </span>
+
+
+                    </div>
+                </div>
+                {% endfor %}
+                <div id="request-section">
+                    <div class="not-box gap-1">
+                        <p> View all notifications</p>
+                        <span>
+                            <img src="{% static 'images/arrow-right.svg' %}" alt="add icon">
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+                        <a href="{% url 'studentauth:logout'  %}">logout</a>
+
+        </section>
+    </div>
+</body>
+</html>

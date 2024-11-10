@@ -1,0 +1,211 @@
+<!-- Add this in the <head> or just before closing </body> tag -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<div class="row">
+        <div class="col-lg-8 ">
+
+
+
+                {% if rooms %}
+                    {% for room in rooms %}
+                    <div class="plan featured col-md-4 col-sm-6 col-xs-12">
+
+                        <p><strong>Room No:</strong> <span id="room-number">{{ room.room_number }}</span></p>
+                <div class="utf_price_plan">
+                    <h3>Select Rate for Room <span  id="room-number-display">{{ room.room_number }}</span></h3>
+
+                    {% if school == 'baze' %}
+                        <!-- If the student is from 'baze', show only the fixed hostel price -->
+                    <p><strong>Price:</strong> NGN <span id="room-price">{{ room.hostel_type.baze_price }}</span></p>
+
+                        <!-- Hidden inputs to hold room and fixed price data -->
+                        <input type="hidden" class="rate_type" value="fixed">
+                        <input type="hidden" class="rate_price" value="{{ room.hostel_type.baze_price }}">
+
+                    {% else %}
+                        <!-- If not from 'baze', show the rate selection for semester/session -->
+                        <select name="hostel_rate" class="utf_chosen_select_single room_rate" required>
+                            <option value="" disabled selected>Select Rate Type</option>
+                            <option value="semester" data-price="{{ room.hostel_type.semester_rate }}">
+                                Semester - NGN {{ room.hostel_type.semester_rate }}
+                            </option>
+                            <option value="session" data-price="{{ room.hostel_type.session_rate }}">
+                                Session - NGN {{ room.hostel_type.session_rate }}
+                            </option>
+                        </select>
+
+                        <!-- Initially set rate to 0 and update dynamically via JavaScript -->
+                        <p><strong>Selected Rate Price:</strong>
+                            NGN <span class="selected-price">0.00</span>
+                        </p>
+
+                        <!-- Hidden inputs to hold selected rate data -->
+                        <input type="hidden" class="rate_type">
+                        <input type="hidden" class="rate_price">
+                    {% endif %}
+                </div>
+
+
+
+                            <div class="utf_price_plan_features">
+                                <ul>
+                                    <li>Beds: {{ room.hostel_type.num_of_beds }} - <span id="occupants">{{ room.current_occupancy}}/{{room.capacity}} occupants in this room </span></li>
+                                    <li>Room Capacity: {{ room.hostel_type.capacity }}</li>
+                                </ul>
+                                <input type="hidden" class="room_id_{{ room.fid }}" value="{{ room.id }}" id="room_id">
+                                <input type="hidden" class="room_number_{{ room.fid }}" value="{{ room.room_number }}" id="room_number">
+                               <button class="button border pay-for-accommodation"
+                                       data-index="{{ room.fid }}">
+                                    <i class="fas fa-shopping-cart"></i> Pay for Accommodation
+                                </button>
+
+                            </div>
+
+                    </div>
+
+
+
+             {% for bed in available_beds %}
+
+
+                    {{bed.bed_type}}
+
+                {% endfor %}
+
+
+
+
+                {% endfor %}
+                     <button id="shuffle-button" class="button border">Shuffle Room</button>
+                {% else %}
+                    <p>No Room available.</p>
+
+                {% endif %}
+
+
+                <input type="hidden" value=" {{ hostel.hid }}" id="id">
+
+                <input type="hidden" value="{{ hostel_type.type }}" id="room_name">
+                <input type="hidden" value="{{ hostel.name }}" id="hotel_name">
+                <input type="hidden" value="{{ hostel_type.baze_price }}" id="room_price">
+                <input type="hidden" value="{{ hostel_type.num_of_beds }}" id="number_of_beds">
+                <input type="hidden" value="{{ hostel_type.atid }}" id="apartment_id">
+                <input type="hidden" value="{{ hostel_type.type }}" id="room_type">
+
+        </div>
+
+
+
+      </div>
+<script>
+$(document).ready(function() {
+    // Pay for Accommodation
+    $(".pay-for-accommodation").on("click", function() {
+        let button = $(this);
+        let id = button.attr("data-index");
+
+        let hotel_id = $("#apartment_id").val().trim();  // Trim any extra spaces
+        let room_id = $(`.room_id_${id}`).val();
+
+
+
+        let planContainer = button.closest('.plan'); // Find the closest container
+        let rate_select = planContainer.find('select[name="hostel_rate"]');
+        let rate_type = rate_select.find(":selected").val(); // Get selected rate type
+        let rate_price = rate_select.find(":selected").data("price"); // Get data-price attribute
+
+
+        console.log("Room ID: ", room_id);
+        console.log("Hotel ID: ", hotel_id);
+        console.log("Hotel ID: ", rate_type);
+        console.log("Hotel ID: ", rate_price);
+
+        $.ajax({
+           url: `/hostel/${hotel_id}/`,  // The URL with the trimmed hotel_id
+            type: 'POST',
+            data: {
+                'room_id': room_id,
+                'hotel_id': hotel_id,
+                 'rate_type': rate_type,
+                'rate_price': rate_price,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+                if (response.success) {
+                     window.location.href = response.redirect_url;
+
+                } else {
+                    alert('Payment failed: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX request failed:', status, error);
+                alert('An error occurred while processing your request.');
+            }
+        });
+    });
+});
+
+
+    document.querySelectorAll('select[name="hostel_rate"]').forEach(function(select) {
+    select.addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var price = selectedOption.getAttribute('data-price');
+        // Update the displayed price or other elements accordingly
+        console.log('Selected Price: ' + price);
+    });
+});
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const rateSelects = document.querySelectorAll('.room_rate');
+
+    rateSelects.forEach(select => {
+        select.addEventListener('change', function () {
+            const selectedOption = select.options[select.selectedIndex];
+            const selectedPrice = selectedOption.getAttribute('data-price');
+            const roomCard = select.closest('.plan');
+
+            // Update the displayed price
+            roomCard.querySelector('.selected-price').textContent = selectedPrice;
+
+            // Update hidden inputs for rate_type and rate_price
+            roomCard.querySelector('.rate_type').value = select.value;  // semester or session
+            roomCard.querySelector('.rate_price').value = selectedPrice;
+        });
+    });
+});
+
+
+
+    //shuffle room
+
+document.getElementById('shuffle-button').addEventListener('click', function() {
+    const hostelTypeId = document.getElementById('apartment_id').value;  // Fetch value from the hidden input
+    console.log("Hostel Type ID:", hostelTypeId);
+    fetch(`/shuffle-room/${hostelTypeId}/`, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.error) {
+            // Update the room details in the HTML
+            document.getElementById('room-number').innerText = data.room_number; // Update room number
+            document.getElementById('room-number-display').innerText = data.room_number; // Update displayed room number
+            document.getElementById('occupants').innerText = data.occupants;
+            document.getElementById('room-price').innerText = data.price; // Update price
+            // If you're using semester/session rates, update those as needed too
+            // Example: Update other relevant fields from the response
+            document.querySelector('.selected-price').innerText = '0.00'; // Reset selected price
+            // You might also want to update rate inputs if necessary
+        } else {
+            console.error(data.error);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+</script>

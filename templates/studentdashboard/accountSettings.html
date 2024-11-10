@@ -1,0 +1,46 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/accountsettings.css' %}">
+
+    <title>Mountainviewprovince.com</title>
+</head>
+<body>
+    <div class="acc-sett-container font-sora">
+        <div class="breadcrumb font-sora">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="prev-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+            <p> Account Settings </p>
+        </div>
+        <div class="set-options">
+            <a href="{% url 'studentauth:profile'  %}"  target="_blank">
+                <div class="set-option">
+                    <h3> Edit Profile</h3>
+                    <p>Customize the personal information in your profile</p>
+                </div>
+            </a>
+            <a href="{% url 'studentauth:change_password'  %}"  target="_blank">
+                <div class="set-option">
+                    <h3> Change Password </h3>
+                    <p>Edit your password for easy authentication </p>
+                </div>
+            </a>
+            <a href="" target="_blank">
+                <div class="set-option">
+                    <h3> Notification setting </h3>
+                    <p>Customize the settings of your notification </p>
+                </div>
+            </a>
+        </div>
+
+
+    </div>
+</body>
+</html>
