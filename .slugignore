@@ -19,8 +19,7 @@ __pycache__/
 .git/
 
 # Exclude static and media files that don't need to be included in the slug
-media/
-static/
+
 staticfiles.json
 node_modules/
 
