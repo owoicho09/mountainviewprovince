@@ -1,0 +1,53 @@
+    <form id="booking-form" action="{% url 'submit-booking' %}" method="POST">
+        {% csrf_token %}
+
+        <!-- Hostel Dropdown -->
+        <label for="hostel-dropdown">Select Hostel:</label>
+        <select id="hostel-dropdown" name="hostel" required>
+            <option value="">-- Select a Hostel --</option>
+            {% for hostel in hostels %}
+                <option value="{{ hostel.id }}">{{ hostel.name }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Block Dropdown -->
+        <label for="block-dropdown">Select Block:</label>
+        <select id="block-dropdown" name="block" required>
+            <option value="">-- Select a Block --</option>
+            {% for block in blocks %}
+                <option value="{{ block.id }}" data-hostel="{{ block.hostel.id }}">{{ block.name }} ({{ block.hostel.name }})</option>
+            {% endfor %}
+        </select>
+
+        <!-- Room Dropdown -->
+        <label for="room-dropdown">Select Room:</label>
+        <select id="room-dropdown" name="room" required>
+            <option value="">-- Select a Room --</option>
+            {% for room in rooms %}
+                <option value="{{ room.id }}" data-block="{{ room.block.id }}">{{ room.name }} ({{ room.block.name }})</option>
+            {% endfor %}
+        </select>
+
+        <!-- User Details -->
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+        <label for="identity-type">Identity Type:</label>
+        <select id="identity-type" name="identity_type" required>
+            <option value="">-- Select Identity Type --</option>
+            <option value="national_id">National ID</option>
+            <option value="student_id">Student ID</option>
+            <option value="passport">Passport</option>
+        </select>
+
+        <label for="identity-image">Upload Identity Image:</label>
+        <input type="file" id="identity-image" name="identity_image" accept="image/*" required>
+
+        <button type="submit">Submit Booking</button>
+    </form>

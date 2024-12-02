@@ -1,0 +1,177 @@
+{% load static %}
+{% load humanize %}
+{% load number_to_word %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bookingform.css' %}">
+    <title>Mountainviewprovince.com</title>
+</head>
+<body>
+    <div class="p-info-container font-sora">
+        <div class="breadcrumb font-sora">
+             <a href="javascript:history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="prev-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+             </a>
+            <p> Personal Information </p>
+        </div>
+        <!-- <div class="p-p">
+            <img src="images/bts.png" alt="profile picture">
+        </div> -->
+     <form action="{% url 'hostel:bookingForm' booking.booking_id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group font-sora">
+            <label for="student's-name">Student's name</label>
+            <input class="font-sora" type="text"  name="fullname" id="student's-name" placeholder="Enter your full name" value="{{ form.fullname.value|default:'' }}">
+
+            <span class="error-msg">{{ form.fullname.errors }}</span>
+
+        </div>
+        <div class="form-group font-sora">
+            <label for="email">Email address</label>
+            <input class="font-sora" type="text" name="email" id="email" placeholder="Enter your email address" value="{{ form.email.value|default:'' }}">
+
+            <span class="error-msg">{{ form.email.errors }}</span>
+        </div>
+        <div class="form-group font-sora">
+            <label for="phone-number">Phone number</label>
+            <input class="font-sora" type="tel" name="phone" id="phone-number" placeholder="Enter your Phone Number"  value="{{ form.phone.value|default:'' }}">
+
+            <span class="error-msg">{{ form.phone.errors }}</span>
+
+        </div>
+        <div class="form-group font-sora">
+            <label for="gender">Gender</label>
+            <!-- <input type="hidden" id="gender" name="gender"> -->
+            <div class="custom-select">
+                <div class="select-selected " tabindex="0" role="button" aria-expanded="false">
+                    <p class="displayText">Select Gender</p>
+                    <span class="sel_icon">
+                        <svg id="caret-down" class="switch-icons caret-d" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                            <g id="SVGRepo_iconCarrier"> <path d="M19.1416 9.92896L12.7776 16.2929C12.3871 16.6834 11.7539 16.6834 11.3634 16.2929L4.99946 9.92895" stroke="#282727" stroke-linecap="round"/> </g>
+                        </svg>
+                        <svg id="caret-up" class="switch-icons caret-u not-expanded" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                            <g id="SVGRepo_iconCarrier"> <path d="M5 14.0711L11.364 7.70711C11.7545 7.31658 12.3877 7.31658 12.7782 7.70711L19.1421 14.0711" stroke="#282727" stroke-linecap="round"/> </g>
+                        </svg>
+                    </span>
+
+                </div>
+                <div class="select-items select-hide">
+                  <div data-value="male" role="option" tabindex="0" class="opt"><p class="option">Male</p></div>
+                  <div data-value="female" role="option" tabindex="0"  class="opt"><p class="option">Female</p></div>
+                </div>
+            </div>
+            <input type="hidden" id="gender" name="gender" value="{{ form.gender.value|default:'' }}">
+
+            <span class="error-msg">{{ form.gender.errors }}</span>
+        </div>
+        <div class="form-group font-sora">
+            <label for="Institution">Institution</label>
+            <!-- <input type="hidden" id="Institution" name="Institution"> -->
+            <div class="custom-select" >
+                <div class="select-selected" tabindex="0" role="button" aria-expanded="false">
+                    <p class="displayText">Select Institution</p>
+                    <span class="sel_icon">
+                        <svg id="caret-down" class="switch-icons" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                            <g id="SVGRepo_iconCarrier"> <path d="M19.1416 9.92896L12.7776 16.2929C12.3871 16.6834 11.7539 16.6834 11.3634 16.2929L4.99946 9.92895" stroke="#282727" stroke-linecap="round"/> </g>
+                        </svg>
+                        <svg id="caret-up" class="switch-icons not-expanded" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                            <g id="SVGRepo_iconCarrier"> <path d="M5 14.0711L11.364 7.70711C11.7545 7.31658 12.3877 7.31658 12.7782 7.70711L19.1421 14.0711" stroke="#282727" stroke-linecap="round"/> </g>
+                        </svg>
+                    </span>
+
+                </div>
+                <div class="select-items select-hide">
+                  <div data-value="Baze University" role="option" tabindex="0" class="opt"><p class="option">Baze University</p></div>
+                  <div data-value="Nile University" role="option" tabindex="0" class="opt"><p class="option">Nile University</p></div>
+                </div>
+            </div>
+            <input type="hidden" id="Institution" name="school" value="{{ form.school.value|default:'' }}">
+
+             <span class="error-msg">{{ form.school.errors }}</span>
+        </div>
+
+        <section id="room-details" class="font-sora">
+            <h2> Room Details </h2>
+            <div class="room-details-content">
+                <div id="room-no">
+                    <p>Room number</p>
+                    <p>Room {{booking.room.room_number}}</p>
+                </div>
+                <div id="n-bed">
+                    <p>No of Bed</p>
+                    <p>{{ booking.room.capacity|number_to_words|title }} ({{booking.room.capacity}})</p>
+                </div>
+                <div id="room-cat">
+                    <p>Room Category</p>
+                    <p>{{booking.hostel_type}}</p>
+                </div>
+                <div id="b-rate">
+                    <p>Booking Rate</p>
+                    <p>{{booking.rate_type}}</p>
+                </div>
+            </div>
+        </section>
+        <section id="payment-details">
+            <h2> Payment Details </h2>
+            <div class="payment-details-content">
+                <div id="total-pay">
+                    {% if flexible_plan_type == 'flexible plan' %}
+                        <p>Price</p>
+                        <p><span class="price">{{booking.initial_payment}}</span></p>
+                    {% else %}
+                         <p>Price</p>
+                        <p><span class="price">{{booking.rate_price}}</span></p>
+                    {% endif %}
+                </div>
+                <div id="sf">
+                    <p>Service Fee</p>
+                    <p><span class="service-charge">0.00</span></p>
+                </div>
+                <hr class="divider">
+                <div id="grand-total">
+                    <p>TOTAL PAYMENT</p>
+                    <p ><span class="result"></span> </p>
+                </div>
+            </div>
+        </section>
+        <div class="button-section ">
+            <button type="submit" id="book-room" class="font-sora">Proceed to checkout </button>
+        </div>
+     </form>
+    </div>
+
+    <script src="{% static 'scripts/personalInformation.js' %}"></script>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if messages %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        {% for message in messages %}
+            Swal.fire({
+            icon: "warning",
+            title: "{{ message|escapejs }}",
+            timer: 5500
+
+        });
+        {% endfor %}
+    });
+</script>
+{% endif %}
+</body>
+</html>

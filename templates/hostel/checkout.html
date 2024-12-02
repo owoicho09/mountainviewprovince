@@ -1,7 +1,7 @@
 {% load static %}
 {% load humanize %}
 {% load number_to_word %}
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/bookingsummary.css' %}">
+        <link rel="stylesheet" href="{% static 'css/sign-up.css' %}">
 
     <title>Mountainviewprovince.com</title>
 </head>
@@ -58,13 +59,19 @@
                 </div>
             </div>
         </section>
+
+
+
+
+
         <section id="payment-details">
             <h2> Payment Details </h2>
             <div class="payment-details-content">
                 <div id="total-pay">
-                    {% if school == 'baze' %}
+                    {% if flexible_plan_type == 'flexible plan' %}
+                    <p><strong>Rate Type :</strong> {{ booking.rate_type|title }}</p>
 
-                    <p>&#8358 <span class="price">{{ booking.hostel_type.baze_price }}</span></p>
+                    <p>&#8358 <span class="price">{{ booking.initial_payment|intcomma }}</span></p>
                      {% else %}
                     <p><strong>Rate Type :</strong> {{ booking.rate_type|title }}</p>
                         <p> &#8358<span class="price"> {{ booking.rate_price|intcomma }}</span></p>
@@ -92,51 +99,18 @@
 
 
 
-                <form method="POST" id="forFlutter" class="pay-form" action="https://checkout.flutterwave.com/v3/hosted/pay">
-                    {% csrf_token %}
 
-                    <input type="hidden" name="public_key" value="FLWPUBK_TEST-02b9b5fc6406bd4a41c3ff141cc45e93-X" />
-                    <input type="hidden" name="customer[email]" value="{{ booking.email }}" />
-                    <input type="hidden" name="customer[name]" value="{{ booking.fullname }}" />
-                    <input type="hidden" name="tx_ref" value="ID-{{ booking.booking_id }}" />
+                   <div class="button-section ">
+                        <button onclick="makePaystackPayment()" id="p-to-pay" class="font-sora">Proceed to pay </button>
+                    </div>
+            </div>
 
-                    {% if school == 'baze' %}
-                        <input type="hidden" name="amount" value="{{ booking.hostel_type.baze_price }}" />
-                    {% else %}
-                        <input type="hidden" name="amount" value="{{ booking.rate_price }}" />
-                    {% endif %}
 
-                    <input type="hidden" name="currency" value="NGN" />
-                    <input type="hidden" name="redirect_url" value="https://c603-102-91-93-116.ngrok-free.app/success/{{booking.booking_id}}/?success_id={{booking.success_id}}&booking_total= {% if school == 'baze' %}{{ booking.hostel_type.baze_price }}{% else %}{{ booking.rate_price }}{% endif %}" />
-
-                    <button type="submit" class="proceed-btn" id="flutterBtn">
-                        <img src="{% static 'images/flutterwave.png' %}" alt="flutterwave logo">
-                    </button>
-                </form>
-
-                <form method="post" action="{% url 'hostel:initialize_payment' %}" id="forRemmita" class="pay-form">
-                    {% csrf_token %}
-                    <input type="hidden" name="name" value="{{booking.fullname}}">
-                    <input type="hidden" name="email" value="{{booking.email}}">
-                    <input type="hidden" name="phone" value="{{booking.phone}}">
-
-                     {% if school == 'baze' %}
-                        <input type="hidden" name="amount" value="{{ booking.hostel_type.baze_price }}" />
-                    {% else %}
-                        <input type="hidden" name="amount" value="{{ booking.rate_price }}" />
-                    {% endif %}
-                   <button type="submit" class="proceed-btn" id="RemmitaBtn">
-                        <img src="{% static 'images/remita.png' %}" alt="flutterwave logo">
-                    </button>
-                </form>
-                    <button onclick="makePaystackPayment()"  class="proceed-btn" id="pStackBtn">
-                        <img src="{% static 'images/paystack.png' %}" alt="flutterwave logo">
-                    </button>            </div>
         </section>
 
 
         <!-- <div class="button-section ">
-            <button type="submit" id="p-to-pay" class="font-sora">Proceed to pay </button>
+            <buttononclick="makePaystackPayment()" id="p-to-pay" class="font-sora">Proceed to pay </button>
         </div>-->
     </div>
 
@@ -150,13 +124,19 @@
 <script src="https://js.paystack.co/v2/inline.js"></script>
 
 <script>
+
+
+
+
+
+
 function makePaystackPayment() {
     const paystack = new PaystackPop()
 
     paystack.newTransaction({
         key: '{{paystack_public_key}}',
         email: '{{ booking.email }}',
-        amount: {% if school == 'baze' %}{{ booking.hostel_type.baze_price }}{% else %}{{ booking.rate_price }}{% endif %} * 100,
+        amount: {% if flexible_plan_type == 'flexible plan' %} {{booking.initial_payment }}  {% else %} {{booking.rate_price}}{% endif %}* 100,
 
         onSuccess: (transaction) => {
             console.log(transaction);
@@ -174,5 +154,7 @@ function makePaystackPayment() {
 </script>
 
             <script src="{% static 'scripts/bookingSummary.js' %}"></script>
+                    <script src="{% static 'scripts/signUp.js' %}"></script>
+
 </body>
 </html>

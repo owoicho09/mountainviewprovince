@@ -44,7 +44,7 @@
                 <a href="#">Blog and news</a>
                 <a href="#">Contact Us</a>
             </div>
-            <a href="{% url 'studentauth:register' %}">
+            <a href="{% url 'hostel:index' %}">
             <button class="get-started">Get started</button>
             </a>
         </div>
@@ -55,9 +55,16 @@
                     <span class="brown-text">affordable accomodation</span>
                 </p>
                 <p>Get to book and enjoy luxury hostels booking easily and conviniently</p>
-                <a href="{% url 'studentauth:register' %}">
-                <button class="get-started">Get started</button>
-                </a>
+
+                <div class="flex btn-box" id="btn-box">
+                    <a href="{% url 'hostel:index' %}" class="get-started">Get started</a>
+                    <a href="https://youtu.be/YDSB-G_ttj4?si=MnMhqdfIuUZH1VU7" target="_blank" rel="noopener noreferrer">
+                        <span class="flex" id="video-btn">
+                            <img src="{% static 'images/play-icon.svg' %}" alt="play icon">
+                            <p class="watch-video">Watch video</p>
+                        </span>
+                    </a>
+                </div>
             </div>
             <div class="image-flask w-full">
                 <div class="flex flask  gap-10">
@@ -249,7 +256,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{% url 'studentauth:register' %}">
+                <a href="{% url 'hostel:index' %}">
 
                 <button id="start-booking">
                     Start Booking now
@@ -312,6 +319,7 @@
             <section class="what-stu-says w-full">
                 <p class="r-header"> What student <span class="brown-text">says</span></p>
                 <p class="brown-text r-header"> about MVP </p>
+                {% for rev in review %}
                 <div class="review-gallery">
                     <div class="flex r-img-holder">
                         <img src="{% static 'images/student-1.png' %}" alt="student's image">
@@ -321,18 +329,17 @@
                     <div class="r-holder flex">
                         <img src="{% static 'images/quote.svg' %}" alt="quote icon">
                         <span>
-                            <p>Josephine Balogun</p>
+                            <p>{{rev.fullname}}</p>
                             <p>Nile University student</p>
                         </span>
                     </div>
                 </div>
                 <div class="review-t">
                     <p>
-                        This text here is a dummy text of what is supposed to
-                        be here which is a short comment of a review written
-                        by one of the student.
+                        {{rev.review}}.
                     </p>
                 </div>
+                {% endfor %}
             </section>
             <section class="news-section" class="w-full">
                 <p class="n-header">Read <span class="brown-text">from MVP</span></p>
@@ -383,7 +390,7 @@
                             Get the best accommodation while you’re studying.
                         </p>
                         <span class="start-booking-block flex">
-                            <a href="{% url 'studentauth:register' %}">
+                            <a href="{% url 'hostel:index' %}">
 
                             <p>Start Booking now</p>
                             </a>
@@ -445,9 +452,13 @@
         <div class="footer-note flex">
             <img src="{% static 'images/mvplogo.svg' %}" alt="mvp hostel icon">
             <p>
-                MVP Hostels    ©2024
+                MVP Hostels    ©2024. <br>
+                Designed By <strong>O.M.O</strong> +234 814 287 8380
+
             </p>
+
         </div>
+
     </section>
     <span>
         <svg class="scroll-to-top" id="scrollToTopBtn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

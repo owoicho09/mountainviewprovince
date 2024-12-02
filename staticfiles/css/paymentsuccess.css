@@ -62,7 +62,7 @@ h1,h2,h3,h4,h5,h6,p{
     background-position: center;
     transform: translate(-50%, -50%);
 }
-#transactionID,#date,#type-of-transac,#status,
+#transactionID,#date,#type-of-transac,#status,#d-balance,
 #amount{
     display: flex;
     justify-content: space-between;

@@ -41,10 +41,31 @@
                     <p>Status</p>
                     <p class="stat-bar">{{booking.payment_status}} </p>
                 </div>
+
+                 <div id="status">
+                    <p>Room Type</p>
+                    <p class="stat-bar">{{booking.hostel_type}} </p>
+                </div>
+                <div id="status">
+                    <p>Room Number</p>
+                    <p class="stat-bar">{{booking.room.room_number}} </p>
+                </div>
+                {% if booking.flexible_plan_type == 'flexible plan' %}
+
                 <div id="amount">
                     <p>Amount</p>
-                    <p class="result">&#8358 {{booking.rate_price|intcomma}} </p>
+                    <p class="result">&#8358 {{booking.initial_payment|intcomma}} </p>
                 </div>
+                 <div id="d-balance">
+                    <p>Due Balance</p>
+                    <p class="result">&#8358 {{booking.remaining_balance|intcomma}} </p>
+                </div>
+                {% else %}
+                 <div id="amount">
+                    <p>Amount</p>
+                    <p class="result"> ₦{{booking.rate_price|intcomma}} </p>
+                </div>
+                {% endif %}
             </div>
         </section>
         <div class="button-section">
@@ -58,7 +79,7 @@
             </button>
         </div>
         <div class="home_link">
-            <a href="{% url 'studentdashboard:dashboard' %}" target="_blank">Return to homepage</a>
+            <a href="https://accounts.google.com/" target="_blank">Check Your Email</a>
         </div>
     </div>
 

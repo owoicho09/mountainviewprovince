@@ -48,33 +48,124 @@ h1,h2,h3,h4,h5,h6{
 }
 .hostel-card{
     display: flex;
-    align-items: center;
+    gap: 10px;
+    /* height: 153px; */
+}
+.select-hostel-info{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 .img-holder{
     display: flex;
     flex-basis: 50%;
     width: 50%;
-    gap: 3px;
+    height: auto;
+    gap: 5px;
     overflow: scroll;
     object-position: center;
     object-fit: cover;
 }
- .hostel-card img{
+.img-holder img{
     position: relative;
-    width: 100%;
+    min-width: 100%;
     height: auto;
- }
+    aspect-ratio: 1/1;
+    object-position: center;
+    object-fit: cover;
+}
+.b-space-available{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    gap: 4px;
+    padding: 6px 5px;
+    background-color: hsla(23, 45%, 84%, 1);
+    border: 0.8px solid hsla(23, 86%, 28%, 1);
+}
+.exc-icon{
+    width: 12px;
+    height: 12px;
+}
+.b-space-available p{
+    margin: 0;
+}
+.bed-count{
+    color: hsla(23, 86%, 28%, 1);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 12.6px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+.b-space-available p:last-child{
+    color: hsla(0, 1%, 16%, 1);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12.6px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+.select-room-header{
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12.6px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+.select-room-no p{
+    margin: 0;
+}
+.bg-brown{
+    background-color: hsla(23, 86%, 28%, 1);
+    color: white;
+}
+.select-room-no{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.r-no-box{
+    padding: 5px 20.33px 6px 20.33px;
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 10.08px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
 .hostel-utilites{
     text-align: left;
 }
-
+.room-row{
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    height: auto;
+    overflow: hidden;
+    border: 0.7px solid hsla(0, 5%, 74%, 1);
+    width: fit-content;
+}
 .hostel-utilites p{
-    margin: 10px;
     font-weight: 400;
     font-size: 10px;
     display: flex;
     align-items: center;
     gap: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.hostel-utilites p:last-child{
+    margin: 0;
 }
 .option-holder{
     display: flex;
@@ -106,6 +197,35 @@ h1,h2,h3,h4,h5,h6{
     border: 1px solid #A19B9B;
     border-radius: 10px;
     padding: 10px;
+}
+.flexible-plan{
+    margin: 0;
+}
+.flexible-block{
+    color: hsla(0, 1%, 16%, 1);
+    margin-top: 13px;
+    margin-bottom: 11px;
+}
+.flexible-block label{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15.12px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+.flex-percent{
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15.12px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
 }
 .custom-checkbox{
     padding: 10px;
@@ -160,6 +280,32 @@ input[type="radio"]#circle-checkbox:checked::after{
     position: absolute;
     background-image: url('../images/checked-img-round.png');
     outline: 1px solid #863A0A;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+}
+input[type="checkbox"]{
+    width: 14.99px;
+    height: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-size: cover;
+    cursor: pointer;
+    position: relative;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 5px;
+}
+input[type="checkbox"].flexible-plan:checked::after{
+    content: '';
+    width: 14.99px;
+    height: 15px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    background-image: url('../images/green-tick.svg');
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 5px;

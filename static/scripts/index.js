@@ -1,7 +1,7 @@
 const openNCloseIcon = document.querySelectorAll('.nav-icon');
 const openNav = document.querySelector(".open-nav");
 const scrollToTopBtn = document.querySelector(".scroll-to-top");
-const scrollProgress = document.getElementById("scroll-progress");
+// const scrollProgress = document.getElementById("scroll-progress");
 
 document.addEventListener("DOMContentLoaded", () => {
 

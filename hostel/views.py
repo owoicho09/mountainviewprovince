@@ -1,16 +1,27 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Hostel,HostelType,Room,Booking,BedSpace,Notification,HostelFeatures
+from .models import Hostel,HostelType,Room,Booking,BedSpace,Notification,HostelFeatures,Block,Review
 from studentauth.models import StudentProfile,CustomUser
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import BlockSerializer, RoomSerializer,HostelTypeSerializer,HostelSerializer
+from django.db.models.functions import Coalesce
+
 from django.http import JsonResponse
 from django.urls import reverse
-from .sms import send_sms,send_invoice
+from .sms import send_sms,send_invoice,send_balance_invoice
 from decimal import Decimal
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from .remita import RemitaPayment
 from django.conf import settings
+from django.db.models import Sum,Value
+
+from datetime import timedelta
+from django.utils import timezone
 import uuid
 import random
 import logging
@@ -21,24 +32,15 @@ import os
 logger = logging.getLogger(__name__)
 
 
-@login_required(login_url='studentauth:login')
 def index(request):
-    hostels = Hostel.objects.filter(active=True)
+    hostels = Hostel.objects.filter(active=True).annotate(
+        total_bedspaces=Coalesce(Sum('blocks__rooms__avilable_bedspace'), Value(0))
+    )
 
-    if request.user.is_authenticated:
-        user_gender = request.user.gender  # Assuming CustomUser has a 'gender' field
-        print("User Gender:", request.user.gender)
 
-        # Filter hostels based on user's gender
-        if user_gender == 'male':
-            hostels = hostels.filter(gender='male')
-        elif user_gender == 'female':
-            hostels = hostels.filter(gender='female')
-        else:
-            messages.error(request, 'You have not yet updated your gender, Do so and try again')
-            hostels = Hostel.objects.none()
+
     context = {
-        'hostels': hostels
+        'hostels': hostels,
     }
 
     return render(request,'hostel/index.html',context)
@@ -46,6 +48,26 @@ def index(request):
 
 def detail_page(request, slug):
     hostels = get_object_or_404(Hostel,slug=slug)
+    blocks = Block.objects.filter(hostel=hostels)
+
+    blocks_with_bedspaces = []
+
+    for block in blocks:
+        # Calculate the total bedspaces for the current block
+        total_bedspaces = block.rooms.aggregate(
+            total_available_bedspaces=Sum('avilable_bedspace')
+        )['total_available_bedspaces'] or 0
+
+        blocks_with_bedspaces.append({
+            'block': block,
+            'total_bedspaces': total_bedspaces
+        })
+
+    room_block_type = HostelType.objects.filter(block__in=blocks)
+    total_available_bed_space =  (hostel_type.total_available_bed_space() for hostel_type in room_block_type)
+    rooms = Room.objects.filter(block__in=blocks, is_available=True)
+    room_count = rooms.count()
+
     user = request.user
     try:
         school = user.school
@@ -56,17 +78,117 @@ def detail_page(request, slug):
 
     context = {
         'hostels': hostels,
+        'blocks':blocks,
+        'rooms':rooms,
+        'room_block_type':room_block_type,
+        'total_available_bed_space':total_available_bed_space,
+        'room_count':room_count,
         'school':school,
-        'hostel_type': hostel_type
+        'hostel_type': hostel_type,
+        'blocks_with_bedspaces':blocks_with_bedspaces
 
     }
 
     return render(request, 'hostel/detail.html', context)
 
+
+
+def block_rooms(request, slug):
+    block = get_object_or_404(Block, slug=slug)
+    hostel_types = HostelType.objects.filter(block=block).annotate(
+        total_available_bedspaces=Sum('room__avilable_bedspace')
+    )
+    hostel_data = []
+    for hostel_type in hostel_types:
+        rooms = Room.objects.filter(hostel_type=hostel_type, is_available=True)
+        hostel_data.append({
+            'hostel_type': hostel_type,
+            'total_available_bedspaces': hostel_type.total_available_bedspaces or 0,
+
+            'rooms': rooms,
+        })
+    # Total bed spaces across all hostel types
+    total_bedspaces = hostel_types.aggregate(Sum('total_available_bedspaces'))['total_available_bedspaces__sum'] or 0
+    initial_payment = 0
+    remaining_balance = 0
+    rooms = Room.objects.filter(block=block)
+    for room in rooms:
+        room.available_bedspace = max(room.capacity - room.current_occupancy, 0)
+    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        hostel_type_id = request.POST.get('hostel_type_id')
+        room_id = request.POST.get('selected_room_category')
+        rate_price = float(request.POST.get('rate_price'))
+        rate_type = request.POST.get('rate_type')
+        flexible_plan_type = request.POST.get('flexible_plan', None)
+
+        hostel_type = HostelType.objects.get(atid=hostel_type_id)
+
+
+        #calculate flexible rate
+        if flexible_plan_type == 'true':
+           flexible_plan_type = 'flexible plan'
+           initial_payment = rate_price  # Adjust price for flexible plan
+           rate_price = rate_price / 0.3
+           remaining_balance = rate_price - initial_payment
+
+
+
+        room = Room.objects.filter(fid=room_id, is_available=True).select_related('hostel_type', 'hostel').first()
+        if not room:
+            return JsonResponse({'success': False, 'message': 'Room fully booked.'}, status=404)
+
+
+        hostel = room.hostel
+
+        booking = Booking.objects.create(
+            hostel=hostel,
+            block=block,
+            hostel_type=hostel_type,
+            room=room,
+            rate_type=rate_type,
+            rate_price=rate_price,
+            flexible_plan_type=flexible_plan_type,
+            initial_payment=initial_payment,
+            remaining_balance=remaining_balance,
+            payment_due_date=(timezone.now() + timedelta(days=30)) if rate_type == 'flexible plan' else None,
+            payment_status='Processing',
+
+        )
+
+
+
+        return JsonResponse({'success': True, 'redirect_url': f'/bookingForm/{booking.booking_id}'})
+
+
+    context = {
+        'block': block,
+        'rooms': rooms,
+        'hostel_data':hostel_data,
+        'hostel_types':hostel_types,
+        'total_bedspaces':total_bedspaces
+    }
+    return render(request, 'hostel/selectroomPage.html', context)
+
+
+
+
 def room_type_page(request, hid):
     # Fetch the hostel using the hostel ID
     hostel = get_object_or_404(Hostel, hid=hid)
-    hostel_typess = HostelType.objects.filter(hostel=hostel)
+    hostel_typess = HostelType.objects.filter(hostel=hostel).annotate(
+        total_available_bedspaces=Sum('room__avilable_bedspace')
+    )
+
+    hostel_data = []
+    for hostel_type in hostel_typess:
+        rooms = Room.objects.filter(hostel_type=hostel_type, is_available=True)
+        hostel_data.append({
+            'hostel_type': hostel_type,
+            'rooms': rooms,
+        })
+
+    # Total bed spaces across all hostel types
+    total_bedspaces = hostel_typess.aggregate(Sum('total_available_bedspaces'))['total_available_bedspaces__sum'] or 0
     features = HostelFeatures.objects.filter(hostel_type__in=hostel_typess)
     paystack_public_key = os.getenv('PAYSTACK_PUBLIC_KEY')
 
@@ -146,6 +268,7 @@ def room_type_page(request, hid):
     context = {
         'hostel': hostel,
         'hostel_type': hostel_typess,
+        'hostel_data': hostel_data,
         'features': features,
         'school': school,
         'paystack_public_key': paystack_public_key
@@ -185,37 +308,69 @@ def shuffle(request, id):
 
 
 
+def bookingForm(request, booking_id):
+
+    booking = Booking.objects.get(booking_id=booking_id)
+    flexible_plan_type = booking.flexible_plan_type
+
+    block = booking.block
+    if request.method == 'POST':
+        fullname = request.POST.get('fullname')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        school = request.POST.get('institution')
+        gender = request.POST.get('gender')
+
+        booking.fullname=fullname
+        booking.email=email
+        booking.phone=phone
+        booking.school=school
+        booking.gender=gender
+
+
+
+        booking.save()
+
+        if block.gender == gender:
+            return redirect(reverse('hostel:checkout', args=[booking.booking_id]))
+        else:
+           messages.warning(request,f'This is a {block.gender} Block, your gender selection does not match this block')
+
+    context = {
+        'booking':booking,
+        'flexible_plan_type': flexible_plan_type,
+
+    }
+
+    return render(request,'hostel/bookingForm.html', context)
 
 
 
 
 
-@login_required(login_url='studentauth:login')
+
 def checkout(request, booking_id):
 
     booking = Booking.objects.get(booking_id=booking_id)
     paystack_public_key = os.getenv('PAYSTACK_PUBLIC_KEY')
-
-    print('----------', booking.email)
-
-    print('======',booking.room)
+    flexible_plan_type = booking.flexible_plan_type
+    rate_type = booking.rate_type
 
     context = {
         'booking':booking,
-
+        'rate_type':rate_type,
+        'flexible_plan_type':flexible_plan_type,
         'paystack_public_key':paystack_public_key
 
     }
 
     return render(request,'hostel/checkout.html', context)
 
-@login_required(login_url='studentauth:login')
 def payment_success(request, booking_id):
     success_id = request.GET.get('success_id')
     booking_total = request.GET.get('booking_total')
 
-    print(f"Success ID: {success_id}")
-    print(f"Booking Total: {booking_total}")
+
 
     if success_id and booking_total:
         success_id = success_id.rstrip('/')
@@ -223,27 +378,32 @@ def payment_success(request, booking_id):
 
         try:
             booking = Booking.objects.get(booking_id=booking_id, success_id=success_id)
-            print(f"Booking Found: {booking}")
-            print('----------', booking.email)
-
-
-            print('========',booking.payment_status)
-            print("Booking Total:", booking_total)
 
             if booking.rate_price == Decimal(booking_total):
                 if booking.payment_status == 'Processing':
                     booking.payment_status = 'Paid'
                     booking.is_active = True
+                    room = booking.room
+                    room.current_occupancy += 1
+                    room.save()
                     booking.save()
                     print(booking.payment_status)
                     if booking.payment_status == 'Paid':
                         invoice_data = {
                             'booking_id': booking.booking_id,
                             'amount':booking_total,
-                            'name': booking.fullname
+                            'name': booking.fullname,
+                            'date':booking.date,
+                            'rate_price':booking.rate_price,
+                            'payment_status':booking.payment_status,
+                            'rate_type':booking.rate_type,
+                            'outstanding':booking.remaining_balance,
+                            'initial_payment':booking.initial_payment,
+                            'hostel_type':booking.hostel_type,
+                            'flexible_plan_type':booking.flexible_plan_type
 
                         }
-                        send_invoice(request.user.email,invoice_data)
+                        send_invoice(booking.email,invoice_data)
 
                     notification = Notification.objects.create(
                         booking=booking,
@@ -338,3 +498,144 @@ def invoice(request, booking_id):
     return render(request,'studentdashboard/invoice.html',context)
 
 
+def Review(request):
+    if request.method == 'POST':
+        fullname = request.method.get('fullname')
+        rating = request.method.get('rating')
+        review = request.method.get('review')
+
+        Review.objects.create(
+            fullname=fullname,
+            rating=rating,
+            review=review
+
+        )
+        return JsonResponse({'data': 'Review Submitted', 'icon': 'success'})
+
+def pay_outstanding_balance(request,booking_id):
+    booking = Booking.objects.get(booking_id=booking_id)
+    fullname = booking.email
+    paystack_public_key = os.getenv('PAYSTACK_PUBLIC_KEY')
+
+    print('--',fullname)
+    context = {
+        'booking':booking,
+        'paystack_public_key':paystack_public_key
+
+    }
+    return render(request,'hostel/pay_outstanding_balance.html', context)
+
+
+def outstanding_payment_success(request, booking_id):
+    # Fetch booking_id from the URL if not passed explicitly
+    booking_id = request.GET.get('booking_id', booking_id)
+    booking_total = request.GET.get('booking_total')
+
+    if booking_total:
+        try:
+            # Ensure booking_total is converted to a Decimal
+            booking_total = Decimal(booking_total)
+
+            # Retrieve the booking object
+            booking = Booking.objects.get(booking_id=booking_id)
+            if booking.remaining_balance == booking_total:
+                # Update the booking's remaining balance
+                booking.remaining_balance = Decimal('0.00')
+                booking.save()
+                if booking.payment_status == 'Paid':
+                    invoice_data = {
+                        'booking_id': booking.booking_id,
+                        'amount': booking_total,
+                        'name': booking.fullname,
+                        'date': booking.date,
+                        'rate_price': booking.rate_price,
+                        'payment_status': booking.payment_status,
+                        'rate_type': booking.rate_type,
+                        'outstanding': booking_total,
+                        'initial_payment': booking.initial_payment,
+                        'hostel_type': booking.hostel_type
+
+                    }
+                    send_balance_invoice(booking.email, invoice_data)
+
+            else:
+                messages.warning(request, 'Payment manipulation detected. Please try again.')
+
+            # Prepare the context for rendering the success page
+            context = {
+                'booking': booking,
+                'booking_total':booking_total
+            }
+            return render(request, 'hostel/outstanding_payment_success.html', context)
+
+        except Booking.DoesNotExist:
+            messages.error(request, 'Booking not found.')
+            return redirect('error_page')  # Replace with the appropriate error page
+
+        except ValueError:
+            messages.error(request, 'Invalid payment amount.')
+            return redirect('error_page')  # Replace with the appropriate error page
+    else:
+        messages.error(request, 'Missing payment details.')
+
+
+#API FOR RETURN ING STUDENTS
+
+@api_view(['GET'])
+def get_hostels(request):
+    try:
+        hostels = Hostel.objects.filter(active=True)
+        serializer = HostelSerializer(hostels, many=True)
+        return Response({'hostels': serializer.data}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+@api_view(['GET'])
+def get_blocks(request):
+    hostel_id = request.GET.get('hostel_id')
+    if not hostel_id:
+        return Response({'error': 'Hostel ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        hostel = Hostel.objects.get(hid=hostel_id)
+        blocks = Block.objects.filter(hostel=hostel)
+        serializer = BlockSerializer(blocks, many=True)
+        return Response({'blocks': serializer.data}, status=status.HTTP_200_OK)
+    except Hostel.DoesNotExist:
+        return Response({'error': 'Hostel not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+def get_hostel_types(request):
+    block_id = request.GET.get('block_id')
+    if not block_id:
+        return Response({'error': 'Block ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        block = Block.objects.get(bid=block_id)
+        hostel_type = HostelType.objects.filter(block=block)
+        serializer = HostelTypeSerializer(hostel_type, many=True)
+        return Response({'hostel_type': serializer.data}, status=status.HTTP_200_OK)
+    except HostelType.DoesNotExist:
+        return Response({'error': 'HostelType not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+def get_rooms(request):
+    block_id = request.GET.get('block_id')
+    if not block_id:
+        return Response({'error': 'Block ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        block = Block.objects.get(bid=block_id)
+        rooms = Room.objects.filter(block=block, is_available=True)
+        serializer = RoomSerializer(rooms, many=True)
+        return Response({'rooms': serializer.data}, status=status.HTTP_200_OK)
+    except Block.DoesNotExist:
+        return Response({'error': 'Block not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

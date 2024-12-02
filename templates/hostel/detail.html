@@ -1,4 +1,5 @@
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,49 +8,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/hosteldetails.css' %}">
+ <link rel="stylesheet" href="{% static 'css/hosteldetails.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.10.1/simple-lightbox.min.css" rel="stylesheet">
-
     <title>Mountainviewprovince.com</title>
 </head>
 <body>
     <div id="hostel-details-container">
         <div class="breadcrumb font-sora">
-            <a href="javascript:history.back()">
+        <a href="javascript:history.back()">
+
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="prev-icon">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
             </svg>
-            </a>
-            <p> Hostel Details</p>
+        </a>
+            <p> Hostel Details </p>
         </div>
-
         <div class="hostel-media-box">
             <img
-                src="{{ hostels.image.url }}"
-                sizes="
-                  (max-width: 575px) 100vw,
-                  (max-width: 991px) 50vw,
-                  33vw
-                "
-                class="m-image"
-                alt="Hostel Preview Image">
-
+            src="{{ hostels.image.url }}"
+            sizes="
+              (max-width: 575px) 100vw,
+              (max-width: 991px) 50vw,
+              33vw
+            "
+            class="m-image"
+            alt="Hostel Preview Image">
         </div>
         <div class="details-section font-sora">
            <div class="hostel-info">
                 <div class="info">
-                    <strong>{{hostels.name}}</strong>
-                    <p>
+                    <p>{{hostels.name}}</p>
+                    <p class="font-sora">
                         <span>
                            <img class="icons" src="{% static 'images/location.png' %}" alt="">
                         </span>
-                        {{hostels.address}}
+                       {{hostels.address}}
                     </p>
 
                 </div>
-                <!--<div>
-                    <p class="p-y"><span class="price-tag">#180,000</span><span class="yr">/year</span></p>
-                </div>-->
+                <div class="">
+                    <p id="p-y">Starts at &nbsp; <span class="price-tag"> #180,000</span></p>
+                </div>
            </div>
            <div class="utilities flex">
                 <div class="utility-box flex">
@@ -113,28 +112,33 @@
                 </div>
            </div>
         </div>
-        <div class="hostel-thumbnails ">
-            <div class="scrollable flex">
-                {% for image in hostels.hotel_gallery.all %}
-            <div class="t-img">
-                <img class="carousel-img" src="{{ image.image.url }}" alt="thumbnail image">
+        <div class="hostel-thumbnails">
+           <div class="scrollable flex">
+               {% for image in hostels.hotel_gallery.all %}
 
-            </div>
+                <div class="t-img">
+                    <img class="carousel-img" src="{{ image.image.url }}" alt="thumbnail image">
+                </div>
+               {% endfor %}
 
-            {% endfor %}
-            </div>
+
+           </div>
+
         </div>
-        <div class="description-box         ">
+        <section class="description-box">
             <h2 class="font-sora">Description</h2>
             <p class="short-description">
- {{hostels.name}} is a modern and elegant student hostel that provides a conducive  and serene enviroment to live while they study               <a href="#" class="toggle-link" aria-expanded="false" role="button">Read More...</a>
+                Blue Water Hostel & Lodge is a modern and elegant student hostel that provides a conducive  and serene enviroment to live while they study
+                <a href="#" class="toggle-link" aria-expanded="false" role="button">Read More...</a>
             </p>
+
             <p class="full-description">
-                It is a contemporary and stylish accommodation facility designed specifically for students.
+                Blue Water Hostel & Lodge is a contemporary and stylish accommodation facility designed specifically for students.
                 It offers a modern and elegant living space that combines comfort and functionality,
                 making it an ideal environment for students to focus on their studies.
-               </p>
-        </div>
+               
+            </p>
+        </section>
         <section id="other-facilities">
             <div class="other-header flex font-sora">
                 <h2> Other Facilities </h2>
@@ -168,19 +172,46 @@
 
             </div>
         </section>
+        <section class="select-hostel-block font-sora">
+            <div class="block-heading flex">
+                <p> Select Hostel Block </p>
+                <span id="block-caret-icons">
+                    <svg id="caret-down" class="hostel-head-icons not-expanded" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                        <g id="SVGRepo_iconCarrier"> <path d="M19.1416 9.92896L12.7776 16.2929C12.3871 16.6834 11.7539 16.6834 11.3634 16.2929L4.99946 9.92895" stroke="#282727" stroke-linecap="round"/> </g>
+                    </svg>
+                    <svg id="caret-up" class="hostel-head-icons " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                        <g id="SVGRepo_iconCarrier"> <path d="M5 14.0711L11.364 7.70711C11.7545 7.31658 12.3877 7.31658 12.7782 7.70711L19.1421 14.0711" stroke="#282727" stroke-linecap="round"/> </g>
+                    </svg>
+                </span>
+            </div>
+            <form id="block-list">
+              {% for block_data in blocks_with_bedspaces %}
+                <a href="{% url 'hostel:block_rooms' block_data.block.slug %}">
+                <div class="form-group flex w-full gap-md">
+                    <div class="b-img-holder">
+                        <img src="{% static 'images/book-one-img.png' %}" alt="hostel's image">
+                    </div>
+                    <div class="b-info">
+                        <span class="flex b-choice gap-3">
+                            <p class="block-type">{{ block_data.block.name }}: {{block_data.block.gender}} block </p>
+                        </span>
+                       <span class="available-rooms flex gap-3">
+                            <p class="no-rooms">{{ block_data.total_bedspaces }}</p>
+                            <p class="r-text">BedSpaces available</p>
+                       </span>
+                    </div>
+                </div>
+                </a>
+                {% endfor %}
 
-        <div class="select-btn flex font-sora">
-            <a href="{% url 'hostel:room_type_page' hostels.hid %}">
 
-            <button id="select-available-rooms">
-                Select Available Rooms
-            </button>
-            </a>
-        </div>
+            </form>
+        </section>
     </div>
     <script src="{% static 'scripts/hosteldetails.js' %}"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.10.1/simple-lightbox.min.js"></script>
-
 </body>
 </html>

@@ -10,11 +10,18 @@ h1,h2,h3,h4,h5,h6{
     margin: 0;
     padding: 0;
 }
+body{
+    margin: 0;
+}
+a{
+   color: hsla(0, 1%, 16%, 1);
+   text-decoration: none;
+}
 .home-container{
     background-color: #F1F1F1;
     min-width: 100%;
     height: 100dvh;
-    padding: 10px;
+    padding: 15px;
 }
 .heading-box{
     padding: 10px;
@@ -45,14 +52,18 @@ h1,h2,h3,h4,h5,h6{
     height: auto;
 }
 
-.car-image{
+.card-image {
     width: 100%;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     position: relative;
 }
 .card-content{
     font-weight: 400;
     font-size: 12px;
     margin-top: 10px;
+    padding: 9px;
 }
 .icon{
     width: 15px;
@@ -62,15 +73,10 @@ h1,h2,h3,h4,h5,h6{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* text-align: end; */
+
 }
 .bold-title{
     font-weight: 600;
-
-}
-a {
-    text-decoration: none;
-
 }
 .ratings{
     font-size: 10px;
@@ -80,14 +86,44 @@ a {
 }
 .location{
     margin: 0px;
+    display: flex;
+    gap: 5.16px;
+    margin-bottom: 14px;
+    margin-top: 6.43px;
+}
+.location p{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15.12px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: hsla(0, 1%, 33%, 1);
+
 }
 .title{
     font-size: 16px;
     margin: 10px 0px;
 }
+.hostel-name{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20.16px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: hsla(0, 1%, 16%, 1);
+}
 .card-content span a:first-child{
     text-decoration: none;
-    color: #282727;
+    color: hsla(0, 1%, 16%, 1);
+    margin-top: 17.57px;
+    margin-left: 9px;
+}
+.card-content p{
+    margin: 0;
 }
 .lower-title{
     font-weight: 300;
@@ -97,4 +133,11 @@ a {
     font-weight: 500;
     color: brown;
     font-size: 14px;
+}
+.rating-p{
+    display: flex;
+    align-items: center;
+}
+.mb-xl{
+   margin-bottom: 30px;
 }

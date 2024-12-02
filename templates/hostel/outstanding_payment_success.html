@@ -1,0 +1,85 @@
+{% load static %}
+{% load humanize %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/paymentsuccess.css">
+    <link rel="stylesheet" href="{% static 'css/paymentsuccess.css' %}">
+    <title>Mountainviewprovince.com</title>
+</head>
+<body>
+    <div class="payment-successful-container">
+        <div class="success-bar ">
+            <div class="m-flex-col-b-radius">
+                <div class="icon-holder">
+                </div>
+            </div>
+            <p class="success-title"> Payment Succesful </p>
+        </div>
+        <section id="payment-details">
+            <h2> Payment Details </h2>
+            <div class="payment-details-content">
+                <div id="transactionID">
+                    <p>Transaction ID</p>
+                    <p class="price">{{booking.booking_id}}</p>
+                </div>
+                <div id="date">
+                    <p>Date & Time</p>
+                    <p class="service-charge">{{booking.date}}</p>
+                </div>
+                <div id="type-of-transac">
+                    <p>Type of Transaction</p>
+                    <p lass="booking">Hostel booking </p>
+                </div>
+                <div id="status">
+                    <p>Status</p>
+                    <p class="stat-bar">{{booking.payment_status}} </p>
+                </div>
+
+                 <div id="status">
+                    <p>Room Type</p>
+                    <p class="stat-bar">{{booking.hostel_type}} </p>
+                </div>
+
+                <div id="amount">
+                    <p>Amount</p>
+                    <p class="result">&#8358 {{booking_total|intcomma}} </p>
+                </div>
+
+            </div>
+        </section>
+        <div class="button-section">
+            <button type="submit" id="p-to-pay" class="m-btn" onclick="downloadInvoice()">
+                <img
+                src="{% static 'images/receive-square.png' %}"
+                alt="recieve icon"
+                loading="lazy"
+                >
+                Download reciept
+            </button>
+        </div>
+       <!-- <div class="home_link">
+            <a href="{% url 'studentdashboard:dashboard' %}" target="_blank">Return to homepage</a>
+        </div> -->
+    </div>
+
+</body>
+
+<script>
+        function downloadInvoice() {
+            const element = document.createElement('a');
+            const file = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+            element.href = URL.createObjectURL(file);
+            element.download = 'invoice.html';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+    </script>
+</html>

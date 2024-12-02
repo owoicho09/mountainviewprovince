@@ -53,6 +53,12 @@ caretDown.addEventListener("click", function(){
 
 const mainImage = document.querySelector(".m-image");
 const carouselImages = document.querySelectorAll(".carousel-img");
+const carouselImagesBoxes = document.querySelectorAll(".t-img");
+
+carouselImagesBoxes.forEach((box) => box.addEventListener("click",()=>{
+    carouselImagesBoxes.forEach((i)=> i.classList.remove("m-select"));
+    box.classList.add("m-select");
+}))
 
 carouselImages.forEach((image) => {
     image.addEventListener("click", () => {
@@ -63,3 +69,11 @@ carouselImages.forEach((image) => {
         }, 500);
     });
 });
+
+
+const blocks = document.querySelectorAll(".form-group");
+blocks.forEach((block) => block.addEventListener("click", () =>{
+   blocks.forEach((b) => b.classList.remove("b-select"));
+
+   block.classList.add("b-select");
+}));

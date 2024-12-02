@@ -32,7 +32,7 @@
             <p> Select Room Type </p>
 
         </div>
-        {% for hostel in hostel_type %}
+        {% for hostel in hostel_data %}
         <div id="selections">
 
             <!-- first option bar -->
@@ -50,7 +50,12 @@
                             checked
                             data-room-id="{{ hostel.atid }}"
                         />
-                        <span> {{ hostel.type }} </span>
+
+
+                        <span> {{ hostel.hostel_type.type }} | {{ hostel.hostel_type.total_available_bedspaces|default:0 }} bed spaces available </span>
+                        {% for room in hostel.rooms %}
+                        <span>{{room.room_number}}</span>
+                        {% endfor %}
                     </label>
                     <span>
                         <svg id="caret-down" class="hostel-head-icons" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,6 +85,8 @@
 
                         <div id="select-hostel-info">
                             <div class="hostel-utilites font-sora">
+                                <p>{{ hostel.name }}:</p>
+
                                 {% for feature in hostel.hotel_feature %}
                                 <p>
                                     <span>
@@ -113,7 +120,7 @@
                         <label class="custom-checkbox font-sora">
                             <span>
                                 <p>Semester rate</p>
-                                <p>&#8358 {{ hostel.semester_rate|intcomma }}</p>
+                                <p>&#8358 {{ hostel.hostel_type.semester_rate|intcomma }}</p>
                             </span>
                             <input
                               type="radio"
@@ -129,7 +136,7 @@
                         <label class="custom-checkbox font-sora">
                             <span>
                                 <p>Session rate</p>
-                                <p>&#8358 {{ hostel.session_rate|intcomma }} </p>
+                                <p>&#8358 {{ hostel.hostel_type.session_rate|intcomma }} </p>
                             </span>
                             <input
                                 type="radio"
