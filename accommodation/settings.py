@@ -110,7 +110,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "accommodation.wsgi.application"
 
-AUTH_USER_MODEL = 'studentauth.CustomUser'
 
 # accommodation/settings.py
 
