@@ -233,9 +233,9 @@ class HostelFeatures(models.Model):
 
 
 class Room(models.Model):
-    hostel = models.ForeignKey(Hostel,on_delete=models.CASCADE)
+    hostel = models.ForeignKey(Hostel,on_delete=models.CASCADE, default=1)
     block = models.ForeignKey(Block, on_delete=models.CASCADE, related_name="rooms", null=True,blank=True)
-    hostel_type = models.ForeignKey(HostelType, on_delete=models.CASCADE)
+    hostel_type = models.ForeignKey(HostelType, on_delete=models.CASCADE,default=1)
     room_number = models.CharField(max_length=5000)
     bed = models.CharField(max_length=10,null=True, blank=True, choices=BED)
     capacity = models.PositiveIntegerField(null=True, blank=True) #number of students this room can accomodate
@@ -275,8 +275,8 @@ class Booking(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True,blank=True)
     hostel = models.ForeignKey(Hostel, on_delete=models.CASCADE)
     block = models.ForeignKey(Block,on_delete=models.CASCADE, null=True,blank=True)
-    hostel_type = models.ForeignKey(HostelType, on_delete=models.CASCADE)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    hostel_type = models.ForeignKey(HostelType, on_delete=models.CASCADE,null=True,blank=True)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True,blank=True)
     fullname = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(max_length=100,null=True,blank=True)
     phone = models.CharField(max_length=100, null=True, blank=True)
