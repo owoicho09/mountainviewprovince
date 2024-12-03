@@ -7,10 +7,12 @@ from studentauth.models import CustomUser, StudentProfile
 
 
 def landing_page(request):
+    hostels = Hostel.objects.filter(active=True)
     review = Review.objects.filter(active=True)
 
 
     context = {
+        'hostels':hostels,
         'review':review
 
     }
