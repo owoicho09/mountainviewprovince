@@ -22,7 +22,7 @@
 
         {% for hostel in hostels %}
         <div class="home-content">
-           <a href="">
+           <a href="{% url 'hostel:detail_page' slug=hostel.slug %}">
                 <div class="card">
                     <div class="card-image-box">
                         <img class="card-image" src="{{ hostel.image.url }}" alt="hostel's images" loading="lazy">
