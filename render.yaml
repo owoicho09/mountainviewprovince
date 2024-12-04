@@ -5,9 +5,11 @@ services:
     buildCommand: |
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
-      cp nginx.conf /etc/nginx/nginx.conf  # Ensure the nginx.conf is copied correctly
+      cp nginx.conf /etc/nginx/nginx.conf
     startCommand: |
-      service nginx start && gunicorn accommodation.wsgi:application --bind 0.0.0.0:8000
+      which nginx 
+      service nginx start  # Try starting NGINX
+      gunicorn accommodation.wsgi:application --bind 0.0.0.0:8000
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: accommodation.settings.production
