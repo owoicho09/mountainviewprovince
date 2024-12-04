@@ -30,3 +30,5 @@ urlpatterns = [
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+if not settings.DEBUG:  # If debug is False, serve media using the production server
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
