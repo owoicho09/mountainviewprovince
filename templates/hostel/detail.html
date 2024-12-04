@@ -139,23 +139,23 @@
                
             </p>
         </section>
-        <section id="other-facilities">
+        <section id="other-facilities" class="drop-container">
             <div class="other-header flex font-sora">
                 <h2> Other Facilities </h2>
-                <span id="caret-icons">
-                    <svg id="caret-down" class="hostel-head-icons not-expanded" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <span id="caret-icons" class="icons-holder">
+                    <svg id="caret-down" class="hostel-head-icons not-expanded c-down" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"/>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
                         <g id="SVGRepo_iconCarrier"> <path d="M19.1416 9.92896L12.7776 16.2929C12.3871 16.6834 11.7539 16.6834 11.3634 16.2929L4.99946 9.92895" stroke="#282727" stroke-linecap="round"/> </g>
                     </svg>
-                    <svg id="caret-up" class="hostel-head-icons " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg id="caret-up" class="hostel-head-icons c-up" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"/>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
                         <g id="SVGRepo_iconCarrier"> <path d="M5 14.0711L11.364 7.70711C11.7545 7.31658 12.3877 7.31658 12.7782 7.70711L19.1421 14.0711" stroke="#282727" stroke-linecap="round"/> </g>
                     </svg>
                 </span>
             </div>
-            <div id="other-content">
+            <div id="other-content" class="dropdown-content">
                <ul class="font-sora">
                     <li> Laundary facility</li>
                     <li> Indoor games</li>
@@ -172,23 +172,23 @@
 
             </div>
         </section>
-        <section class="select-hostel-block font-sora">
+        <section class="select-hostel-block font-sora drop-container">
             <div class="block-heading flex">
                 <p> Select Hostel Block </p>
-                <span id="block-caret-icons">
-                    <svg id="caret-down" class="hostel-head-icons not-expanded" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <span id="block-caret-icons" class="icons-holder">
+                    <svg id="caret-down" class="hostel-head-icons not-expanded c-down" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"/>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
                         <g id="SVGRepo_iconCarrier"> <path d="M19.1416 9.92896L12.7776 16.2929C12.3871 16.6834 11.7539 16.6834 11.3634 16.2929L4.99946 9.92895" stroke="#282727" stroke-linecap="round"/> </g>
                     </svg>
-                    <svg id="caret-up" class="hostel-head-icons " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg id="caret-up" class="hostel-head-icons c-up" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"/>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
                         <g id="SVGRepo_iconCarrier"> <path d="M5 14.0711L11.364 7.70711C11.7545 7.31658 12.3877 7.31658 12.7782 7.70711L19.1421 14.0711" stroke="#282727" stroke-linecap="round"/> </g>
                     </svg>
                 </span>
             </div>
-            <form id="block-list">
+            <form id="block-list" class="dropdown-content">
               {% for block_data in blocks_with_bedspaces %}
                 <a href="{% url 'hostel:block_rooms' block_data.block.slug %}">
                 <div class="form-group flex w-full gap-md">

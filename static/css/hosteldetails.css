@@ -219,6 +219,10 @@ a{
 .not-expanded{
     display: none;
 }
+.no-h{
+    height: 0;
+    opacity: 0;
+}
 .hostel-head-icons{
     width: 25px;
     height: 25px;
@@ -332,7 +336,7 @@ li::marker{
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
 }
-.r-text{
+button .r-text{
     font-size: 12px;
     font-weight: 400;
     line-height: 15.12px;
@@ -340,10 +344,17 @@ li::marker{
     text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
+    /* color: red; */
 }
 .b-select{
     border: 1.3px solid hsla(23, 86%, 28%, 1);
 }
 .m-select{
     border: 1.5px solid hsla(23, 86%, 28%, 1);
+}
+#block-list button{
+    border: none;
+    font-family: "Sora", system-ui;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
