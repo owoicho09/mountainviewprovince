@@ -139,7 +139,7 @@ function makePaystackPayment() {
         amount: {% if flexible_plan_type == 'flexible plan' %} {{booking.initial_payment }}  {% else %} {{booking.rate_price}}{% endif %}* 100,
 
         onSuccess: (transaction) => {
-            console.log(transaction);
+
             window.location.href = "/success/{{ booking.booking_id }}/?success_id={{ booking.success_id }}&booking_total={{ booking.rate_price }}"
         },
 

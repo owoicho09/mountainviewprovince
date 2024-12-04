@@ -136,7 +136,7 @@ def block_rooms(request, slug):
         room = Room.objects.filter(fid=room_id, is_available=True).select_related('hostel_type', 'hostel').first()
         if not room:
             return JsonResponse({'success': False, 'message': 'Room fully booked.'}, status=404)
-
+        print('-------',room)
 
         hostel = room.hostel
 

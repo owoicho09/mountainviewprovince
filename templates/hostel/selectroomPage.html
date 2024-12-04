@@ -86,7 +86,7 @@
                             <div class="select-hostel-info ">
 
                                 <div class="b-space-available font-sora">
-                                    <img class="exc-icon" src="{% static 'images/exclamation.svg' %}" alt="exclamation icon">
+                                  <!--  <img class="exc-icon" src="{% static 'images/exclamation.svg' %}" alt="exclamation icon"> -->
                                     <p class="bed-count">{{hostel.total_available_bedspaces}}</p>
                                     <P>bedspace available</P>
                                 </div>
@@ -94,16 +94,16 @@
                                 <div class="select-room-no font-sora">
                                     <p class="select-room-header">Select room number</p>
 
-                                    <div class="room-row">
+                                   <div class="room-row">
                                     {% for room in hostel.rooms %}
-
-                                        <span class="r-no-box"> {{room.room_number}}</span>
-                                        <input type="hidden" name="room-number" id="selected-room-number" value="{{room.fid}}">
-
-
+                                        <span class="r-no-box" data-room-id="{{ room.fid }}">
+                                            {{ room.room_number }}
+                                        </span>
                                     {% endfor %}
+                                    <input type="hidden" name="selected-room" id="selected-room">
+                                </div>
 
-                                    </div>
+
 
                                 </div>
                                 <div class="hostel-utilites font-sora">

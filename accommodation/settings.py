@@ -50,7 +50,7 @@ TERMII_SENDER_ID = 'termii'
 SECRET_KEY = "django-insecure-*g$(bg=4p=!5&)g61zfxtfvto&^ha*t1fa^#m8fh0evu8yb)r!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG =True
 
 ALLOWED_HOSTS = ['mountainviewprovince-1.onrender.com', 'localhost']
 BASE_URL = 'https://mountainviewprovince-1.onrender.com'
@@ -200,7 +200,7 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/data/media/'  # This should match the path you've selected on Render
+MEDIA_ROOT = '/data/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
