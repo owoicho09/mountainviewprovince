@@ -3,14 +3,14 @@ $('#room-selection-form').on('submit', function(event) {
 
     // Gather form data
     let hostel_type_id = $("input[name='hostel_type_id']:checked").val();
-    let selected_room_category = $("input[name='room-number']").val();
+    let selected_room_category = $("#selected-room").val();  // Use hidden input value
 
     let rate_type = $("input[name='hostel_rate']:checked").val();
     let rate_price = $("input[name='hostel_rate']:checked").data("price");
     let csrfToken = $("input[name='csrfmiddlewaretoken']").val();
     const isFlexiblePlanChecked = $('.flexible-plan').is(':checked');
 
-   // console.log("Flexible Plan Checked: ", isFlexiblePlanChecked);
+    //console.log("Flexible Plan Checked: ", isFlexiblePlanChecked);
     //console.log('---',rate_type)
     //console.log(rate_price)
     //console.log(selected_room_category)

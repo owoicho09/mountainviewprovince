@@ -131,6 +131,8 @@ def block_rooms(request, slug):
            rate_price = rate_price / 0.3
            remaining_balance = rate_price - initial_payment
 
+        if not room_id:
+            return JsonResponse({'error': False, 'message': 'Please Select a room number.'}, status=404)
 
 
         room = Room.objects.filter(fid=room_id, is_available=True).select_related('hostel_type', 'hostel').first()

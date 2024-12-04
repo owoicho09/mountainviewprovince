@@ -51,6 +51,12 @@ a{
     width: 100%;
     height: auto;
 }
+.card-image-box{
+    width: 100%;
+    max-height: 176px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
 
 .card-image {
     width: 100%;
