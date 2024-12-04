@@ -50,7 +50,7 @@ TERMII_SENDER_ID = 'termii'
 SECRET_KEY = "django-insecure-*g$(bg=4p=!5&)g61zfxtfvto&^ha*t1fa^#m8fh0evu8yb)r!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['mountainviewprovince-1.onrender.com', 'localhost']
 BASE_URL = 'https://mountainviewprovince-1.onrender.com'
