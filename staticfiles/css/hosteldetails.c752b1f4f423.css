@@ -1,0 +1,360 @@
+*,
+::before,
+::after{
+    box-sizing: border-box;
+  background-color: #F1F1F1;
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+}
+.font-sora{
+    font-family: "Sora", system-ui;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.breadcrumb{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+.icons,.prev-icon{
+    width: 15px;
+    height: 15px;
+}
+.hostel-media-box{
+    width: 100%;
+    aspect-ratio: 1/1;
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    overflow: hidden;
+}
+/* .hostel-media-box img{
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease;
+} */
+.hostel-media-box img.hidden{
+    opacity: 0;
+}
+
+.m-image{
+    position: relative;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease;
+    /* border: 1px solid green; */
+}
+#hostel-details-container{
+    padding: 10px;
+    min-height: 100dvh;
+
+}
+.utilities{
+    justify-content: space-between;
+}
+.utility-box{
+    margin: 10px 0px;
+    padding: 5px 10px;
+    background-color: #D6D4CF;
+    border-radius: 9px;
+    justify-content: space-between;
+}
+.utility-box span svg{
+    background-color: #D6D4CF;
+}
+.utility-box p{
+    margin: 5px;
+    background-color: #D6D4CF;
+   font-weight: 400;
+   font-size: 10px;
+   color: #282727;
+}
+.flex{
+    display: flex;
+    align-items: center;
+}
+.w-full{
+    width: 100%;
+}
+.util-img{
+    width: 20px;
+    height: 20px;
+}
+.hostel-info{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 10px;
+}
+.hostel-info div p:nth-of-type(1){
+    font-weight: 600;
+    font-size: 14px;
+    color: #282727;
+    margin: 5px 0px;
+}
+.hostel-info div p:nth-of-type(2){
+    font-weight: 400;
+    font-size: 12px;
+    color: #282727;
+    margin: 5px 5px 5px 0px;
+
+}
+
+#p-y{
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 12.6px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: hsla(0, 1%, 33%, 1);
+}
+
+.price-tag{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17.64px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #863A0A;
+}
+.hostel-thumbnails{
+    margin: 20px 0px;
+}
+.scrollable{
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    gap: 10px;
+}
+.t-img{
+    min-width: 20%;
+    /* height: 50%; */
+    /* width: 50; */
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 5px 0px;
+}
+.t-img img{
+    width: 100%;
+    height: 100%;
+}
+.full-description{
+    display: none;
+}
+.toggle-link{
+    cursor: pointer;
+    color: #863A0A;
+}
+
+a{
+    text-decoration: none;
+}
+.full-description {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 2s ease-in-out;
+}
+
+.full-description.expanded {
+    display: inline-block;
+    max-height: 500px;
+}
+.short-description ,.full-description{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: 12px;
+    font-style: normal;
+    color: #52504B;
+    line-height: 22.2px;
+    text-align: left;
+    padding: 0px 5px;
+}
+.description-box{
+    margin: 2rem 0rem;
+}
+.my-border{
+    border: 1px solid black;
+
+}
+.description-box p{
+    width: 90%;
+    margin: 5px 0px;
+}
+.description-box h2{
+    margin: 5px 0px;
+    font-weight: 600;
+    font-size: 12px;
+    color: #282727;
+}
+#select-available-rooms{
+    border: none;
+    background-color: #863A0A;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 14px;
+}
+.st0{
+    fill:none;
+    stroke:#000000;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:10;
+}
+#Icons.st0{
+    background-color:#D6D4CF;
+}
+.not-expanded{
+    display: none;
+}
+.no-h{
+    height: 0;
+    opacity: 0;
+}
+.hostel-head-icons{
+    width: 25px;
+    height: 25px;
+}
+ul{
+   padding-left: 20px;
+   margin: 5px 0px;
+}
+li{
+    list-style: disc;
+    font-weight: 400;
+    font-size: 12px;
+}
+li::marker{
+    color: #863A0A;
+    font-size: 1rem;
+}
+.other-header{
+   justify-content: space-between;
+}
+.other-header h2{
+    font-weight: 600;
+    font-size: 13px;
+}
+#other-content{
+    width: 100%;
+    opacity: 1;
+    overflow: hidden;
+    transition: height 0.5s ease, opacity 0.5s ease;
+}
+.block-heading{
+   justify-content: space-between;
+}
+.block-heading p{
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16.38px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: hsla(0, 1%, 16%, 1);
+    margin: 0;
+}
+.border{
+    border: 1px solid black;
+}
+.select-hostel-block{
+    margin-top: 50px;
+}
+#block-list{
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    margin-top: 23px;
+}
+.b-img-holder{
+    width: 23%;
+    height: 47px;
+    object-fit: cover;
+    object-position: center;
+}
+.b-img-holder img{
+    width: 100%;
+    height: 100%;
+}
+.b-info{
+    width: 75%;
+    height: 47px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.b-info p {
+    margin: 0;
+}
+.form-group{
+    padding: 11px 10px 17px 15px;
+    border-radius: 5px;
+}
+.form-group,.b-info,
+.b-info span,
+.b-info p{
+    background-color: hsla(0, 4%, 90%, 1);
+}
+.gap-3{
+    gap: 3px;
+}
+.gap-md{
+    gap: 10px;
+}
+.b-choice{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17.64px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: hsla(0, 1%, 16%, 1);
+}
+.available-rooms{
+    color: hsla(0, 1%, 33%, 1);
+}
+.no-rooms{
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15.12px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+button .r-text{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15.12px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    /* color: red; */
+}
+.b-select{
+    border: 1.3px solid hsla(23, 86%, 28%, 1);
+}
+.m-select{
+    border: 1.5px solid hsla(23, 86%, 28%, 1);
+}
+#block-list button{
+    border: none;
+    font-family: "Sora", system-ui;
+    font-optical-sizing: auto;
+    font-style: normal;
+}

@@ -1,13 +1,18 @@
 services:
   - type: web
-    name: accommodation  # Use the actual project/service name
+    name: accommodation
     env: python
     buildCommand: |
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
-      cp nginx.conf /etc/nginx/nginx.conf  # Copy custom NGINX config
+      cp nginx.conf /etc/nginx/nginx.conf  # Ensure the nginx.conf is copied correctly
     startCommand: |
       service nginx start && gunicorn accommodation.wsgi:application --bind 0.0.0.0:8000
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: accommodation.settings.production
     routes:
-      - src: /*
-        dest: /
+      - src: /static/*
+        dest: /static/
+      - src: /media/*
+        dest: /media/
