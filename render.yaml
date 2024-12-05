@@ -12,6 +12,6 @@ services:
         value: accommodation.settings.production
     staticPublishPath: staticfiles
     disk:
-      - name: media-disk
-        mountPath: /data/media
-        sizeGb: 1
+      name: media-disk
+      mountPath: /data/media
+      sizeGb: 1
