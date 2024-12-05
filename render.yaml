@@ -3,6 +3,7 @@ services:
     name: accommodation
     env: python
     buildCommand: |
+      pip install --upgrade pip setuptools
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
     startCommand: |
