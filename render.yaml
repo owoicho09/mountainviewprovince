@@ -14,4 +14,4 @@ services:
     disk:
       name: media-disk
       mountPath: /data/media
-      sizeGb: 1
+      size: 1Gi
