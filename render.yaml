@@ -10,7 +10,6 @@ services:
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: accommodation.settings.production
-    staticPublishPath: staticfiles
     disk:
       name: media-disk
       mountPath: /data/media
