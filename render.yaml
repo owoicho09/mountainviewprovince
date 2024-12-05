@@ -10,8 +10,8 @@ services:
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: accommodation.settings.production
-    routes:
-      - src: /static/*
-        dest: /static/
-      - src: /media/*
-        dest: /data/media/
+    staticPublishPath: staticfiles
+    disk:
+      name: media-disk
+      mountPath: /data/media
+      sizeGb: 1
