@@ -12,7 +12,7 @@ COPY . /app/
 
 # Install Nginx
 RUN apt-get update && apt-get install -y nginx
-
+RUN nginx -v
 # Set up Nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/default
