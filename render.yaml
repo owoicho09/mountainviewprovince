@@ -6,8 +6,6 @@ services:
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
     startCommand: |
-      apt-get update && apt-get install -y nginx  # Install Nginx
-      service nginx start                        # Start Nginx
       gunicorn accommodation.wsgi:application --bind 0.0.0.0:8000
     envVars:
       - key: DJANGO_SETTINGS_MODULE
@@ -16,4 +14,4 @@ services:
       - src: /static/*
         dest: /static/
       - src: /media/*
-        dest: /media/
+        dest: /data/media/
