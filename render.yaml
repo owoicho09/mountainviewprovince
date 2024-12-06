@@ -14,10 +14,10 @@ services:
     disk:
       name: media-disk
       mountPath: /data/media/
-    staticPublish:
-      - name: static-files
-        source: /staticfiles
-        destination: /static
-      - name: media-files
-        source: /data/media/
-        destination: /media/
+staticPublish:
+  - name: static-files
+    source: /staticfiles
+    destination: /static
+  - name: media-files
+    source: /data/media/
+    destination: /media/
