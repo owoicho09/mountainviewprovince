@@ -13,6 +13,7 @@ COPY . /app/
 # Install Nginx
 RUN apt-get update && apt-get install -y nginx
 RUN nginx -v
+
 # Set up Nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/default
@@ -21,5 +22,14 @@ RUN rm /etc/nginx/sites-enabled/default
 EXPOSE 8000
 EXPOSE 80
 
-# Start Gunicorn and Nginx (using supervisord or directly in CMD)
-CMD ["sh", "-c", "gunicorn accommodation.wsgi:application --bind 0.0.0.0:$PORT & nginx -g 'daemon off;'"]
+# Define the port environment variable (use 8000 as default)
+ENV PORT 8000
+
+# Use supervisord to manage Gunicorn and Nginx processes
+RUN apt-get install -y supervisor
+
+# Create supervisor configuration file
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Start both Gunicorn and Nginx with supervisord
+CMD ["/usr/bin/supervisord"]

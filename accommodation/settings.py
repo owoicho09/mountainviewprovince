@@ -50,12 +50,16 @@ TERMII_SENDER_ID = 'termii'
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
-
+#DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = True
 ALLOWED_HOSTS = ['mountainviewprovince-1.onrender.com', 'localhost']
 BASE_URL = 'https://mountainviewprovince-1.onrender.com'
 
 # Application definition
+CORS_ALLOWED_ORIGINS = [
+    "https://mountainviewprovince-1.onrender.com",
+]
+
 
 INSTALLED_APPS = [
     "jazzmin",
@@ -201,7 +205,7 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/data/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'data', 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
