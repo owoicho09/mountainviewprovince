@@ -14,7 +14,8 @@ services:
     disk:
       name: media-disk
       mountPath: /data/media
-    staticPublish:
-      - name: media-files
-        source: /data/media
-        destination: /media/
+
+staticPublish:
+  - name: media-files
+    source: /data/media
+    destination: /media
