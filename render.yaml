@@ -13,9 +13,9 @@ services:
         value: accommodation.settings.production
     disk:
       name: media-disk
-      mountPath: /data/media
+      mountPath: /data/media/
 
 staticPublish:
   - name: media-files
-    source: /data/media
-    destination: /media
+    source: /data/media/
+    destination: /media/
