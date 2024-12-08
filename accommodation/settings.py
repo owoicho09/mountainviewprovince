@@ -42,7 +42,9 @@ REMITA_SERVICE_TYPE_ID = env('REMITA_SERVICE_TYPE_ID')
 DATABASE_URL = env('DATABASE_URL')
 TERMII_API_KEY = 'TLCeWhjTrntYDsZzVSHzYRrpIDHjzQMEybRSjEPaMMnlrvInycHSMEoUWhnBVw'
 TERMII_SENDER_ID = 'termii'
-
+CLOUD_NAME= env('CLOUD_NAME')
+API_KEY= env('API_KEY')
+API_SECRET= env('API_SECRET')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -50,8 +52,8 @@ TERMII_SENDER_ID = 'termii'
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
-
+#DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = False
 ALLOWED_HOSTS = ['mountainviewprovince-1.onrender.com', 'localhost']
 BASE_URL = 'https://mountainviewprovince-1.onrender.com'
 
@@ -78,6 +80,9 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'dbbackup',
+
+    'cloudinary',
+    'cloudinary_storage'
 
 ]
 
@@ -204,13 +209,26 @@ STATICFILES_DIRS = [
 # Enable WhiteNoise static file compression and caching
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/data/media/'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY': env('API_KEY'),
+    'API_SECRET': env('API_SECRET'),
+}
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+MEDIA_URL = f"https://res.cloudinary.com/dtlz2vhof/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'data', 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 django_heroku.settings(locals())
+
+
+
+
 
 
 JAZZMIN_SETTINGS = {

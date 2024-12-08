@@ -8,10 +8,11 @@ from django.conf import settings
 from django.utils.safestring import mark_safe
 from django.db.models import F, Sum
 from decimal import Decimal
+from cloudinary.models import CloudinaryField
 
 from datetime import timedelta
-
-
+from cloudinary import uploader
+import cloudinary
 # Create your models here.
 STATUS = (
     ('Draft', 'Draft'),
@@ -73,14 +74,18 @@ RATING = (
     ( 4,  "★★★★☆"),
     ( 5,  "★★★★★"),
 )
-
+cloudinary.config(
+    cloud_name=settings.CLOUD_NAME,
+    api_key=settings.API_KEY,
+    api_secret=settings.API_SECRET
+)
 
 class Hostel(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='hostels', null=True,blank=True)
     name = models.CharField(max_length=200)
     hid = ShortUUIDField(unique=True, length=7, max_length=20, alphabet=string.ascii_letters + string.digits, primary_key=True)
     address = models.CharField(max_length=200)
-    image = models.FileField(upload_to='hostel_gallery')
+    image = CloudinaryField('image', null=True, blank=True)
     description = models.CharField(max_length=1000,null=True,blank=True)
     phone = models.CharField(max_length=100)
     email = models.EmailField(max_length=200)
@@ -108,6 +113,18 @@ class Hostel(models.Model):
 
     def hotel_gallery(self):
         return HostelGallery.objects.filter(hostel=self)
+
+    def save(self, *args, **kwargs):
+
+        super().save(*args, **kwargs)
+
+    @property
+    def image_url(self):
+        # Override the default url property to return Cloudinary URL correctly
+        if self.image:
+            return self.image
+        return None
+
 
 class HostelGallery(models.Model):
     hostel = models.ForeignKey(Hostel,on_delete=models.CASCADE)
