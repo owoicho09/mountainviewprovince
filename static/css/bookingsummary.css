@@ -55,6 +55,13 @@ p{
 #grand-total,#payment-options{
     display: flex;
 }
+.selected-img{
+    display: auto;
+    height:50%;
+    width:100%;
+
+
+}
 #room-no,#room-cat,
 #n-bed,#b-rate,#total-pay,#sf,#grand-total{
     justify-content: space-between;
