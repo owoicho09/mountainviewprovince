@@ -128,7 +128,7 @@ class Hostel(models.Model):
 
 class HostelGallery(models.Model):
     hostel = models.ForeignKey(Hostel,on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='hostel_gallery')
+    image = CloudinaryField('image', null=True, blank=True)
     hid = ShortUUIDField(unique=True, length=10, max_length=20, alphabet=string.ascii_letters + string.digits)
 
     def __str__(self):
@@ -146,7 +146,7 @@ class HostelGallery(models.Model):
 
 class Block(models.Model):
     hostel = models.ForeignKey(Hostel, on_delete=models.CASCADE, related_name='blocks')
-    image = models.ImageField(upload_to='hostel_gallery', null=True,blank=True)
+    image = CloudinaryField('image', null=True, blank=True)
     name = models.CharField(max_length=100)
     gender = models.CharField(choices=GENDER, max_length=50,null=True,blank=True)
     bid = ShortUUIDField(unique=True, length=10, max_length=20, alphabet=string.ascii_letters + string.digits)
@@ -168,7 +168,7 @@ class HostelType(models.Model):
     hostel = models.ForeignKey(Hostel, on_delete=models.CASCADE)
     block = models.ForeignKey(Block, on_delete=models.CASCADE, related_name="hostel_types", null=True, blank=True)
 
-    image = models.ImageField(upload_to='hostel_gallery', null=True,blank=True)
+    image = CloudinaryField('image', null=True, blank=True)
     type = models.CharField(max_length=100)
     rate_type = models.CharField(max_length=10, choices=[('semester', 'Semester'), ('session', 'Session')], null=True, blank=True)
 
@@ -219,7 +219,7 @@ class HostelType(models.Model):
 
 class HostelTypeGallery(models.Model):
     hostel_type = models.ForeignKey(HostelType, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='hostel_type_gallery')
+    image = CloudinaryField('image', null=True, blank=True)
     hid = ShortUUIDField(unique=True, length=10, max_length=20, alphabet=string.ascii_letters + string.digits)
 
     def __str__(self):
@@ -251,6 +251,8 @@ class HostelFeatures(models.Model):
 
 class Room(models.Model):
     hostel = models.ForeignKey(Hostel,on_delete=models.CASCADE, default=1)
+    image = CloudinaryField('image', null=True, blank=True)
+
     block = models.ForeignKey(Block, on_delete=models.CASCADE, related_name="rooms", null=True,blank=True)
     hostel_type = models.ForeignKey(HostelType, on_delete=models.CASCADE,default=1)
     room_number = models.CharField(max_length=5000)

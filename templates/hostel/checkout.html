@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/bookingsummary.css' %}">
-        <link rel="stylesheet" href="{% static 'css/sign-up.css' %}">
 
     <title>Mountainviewprovince.com</title>
 </head>
@@ -25,8 +24,9 @@
         </div>
 
         <section id="selected-hostel">
-            <div>
-                <img class="selected-img" src="{% static 'images/hostel-card-img.png' %}" alt="hostel's image" loading="lazy">
+            <div class="selected-img">
+                <img id="selected-img" src="{{booking.hostel.image.url}}" alt="hostel's image" loading="lazy" style="width: 55px; height: 55px;" >
+
             </div>
             <div class="booked-details">
                 <p class="hos-name">{{booking.hostel}}</p>
@@ -82,7 +82,7 @@
 
                 <div id="sf">
                     <p>Service Fee</p>
-                    <p>&#8358 <span class="service-charge">500</span></p>
+                    <p>&#8358 <span class="service-charge">0.00</span></p>
                 </div>
                 <hr class="divider">
                 <div id="grand-total">
@@ -94,7 +94,6 @@
             </div>
         </section>
         <section id="payment-method">
-            <h2>Payment Method</h2>
             <div id="payment-options">
 
 

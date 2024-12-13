@@ -25,7 +25,12 @@
            <a href="{% url 'hostel:detail_page' slug=hostel.slug %}">
                 <div class="card">
                     <div class="card-image-box">
-                        <img class="card-image" src="{{ hostel.image.url }}" alt="hostel's images" loading="lazy">
+                        <img src="{{ hostel.image.url }}"
+                             alt="hostel's images" loading="lazy" style=" width: 100%;
+                            max-height: 176px;
+                            border-top-left-radius: 5px;
+                            border-top-right-radius: 5px;
+                                    ">
                     </div>
                     <div class="card-content">
                         <span class="title-span">

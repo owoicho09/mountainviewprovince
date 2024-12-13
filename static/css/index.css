@@ -63,7 +63,6 @@ a{
     height: 100%;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    position: relative;
 }
 .card-content{
     font-weight: 400;
