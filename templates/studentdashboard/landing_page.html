@@ -166,6 +166,7 @@
                         and preferences.
                     </p>
                 </div>
+
                 <div class="carousel-box w-full">
                     <div class="c-1">
                         <div class="hostel-box">
@@ -260,6 +261,7 @@
                         </div>
                     </div>
                 </div>
+
                 <a href="{% url 'hostel:index' %}">
 
                 <button id="start-booking">
@@ -323,7 +325,7 @@
             <section class="what-stu-says w-full">
                 <p class="r-header"> What student <span class="brown-text">says</span></p>
                 <p class="brown-text r-header"> about MVP </p>
-                {% for rev in review %}
+               <!-- {% for rev in review %}
                 <div class="review-gallery">
                     <div class="flex r-img-holder">
                         <img src="{% static 'images/student-1.png' %}" alt="student's image">
@@ -343,7 +345,7 @@
                         {{rev.review}}.
                     </p>
                 </div>
-                {% endfor %}
+                {% endfor %}-->
             </section>
             <section class="news-section" class="w-full">
                 <p class="n-header">Read <span class="brown-text">from MVP</span></p>
