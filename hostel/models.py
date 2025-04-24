@@ -156,7 +156,7 @@ class Block(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(self.name) + self.bid
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -259,7 +259,7 @@ class Room(models.Model):
     bed = models.CharField(max_length=10,null=True, blank=True, choices=BED)
     capacity = models.PositiveIntegerField(null=True, blank=True) #number of students this room can accomodate
     current_occupancy = models.PositiveIntegerField(default=0)
-    avilable_bedspace = models.PositiveIntegerField(default=0,null=True,blank=True)
+    available_bedspace = models.PositiveIntegerField(default=0,null=True,blank=True)
     is_available = models.BooleanField(default=True)
     fid = ShortUUIDField(unique=True, length=10, max_length=20, alphabet=string.ascii_letters + string.digits)
     date = models.DateTimeField(auto_now_add=True)
@@ -270,7 +270,7 @@ class Room(models.Model):
         else:
             self.is_available = True
 
-        self.avilable_bedspace = max(self.capacity - self.current_occupancy, 0)
+        self.available_bedspace = max(self.capacity - self.current_occupancy, 0)
         super().save(*args, **kwargs)
 
     def __str__(self):

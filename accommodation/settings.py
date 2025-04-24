@@ -39,7 +39,7 @@ REMITA_MERCHANT_ID = env('REMITA_MERCHANT_ID')
 REMITA_API_KEY = env('REMITA_API_KEY')
 REMITA_SERVICE_TYPE_ID = env('REMITA_SERVICE_TYPE_ID')
 
-DATABASE_URL = env('DATABASE_URL')
+#DATABASE_URL = env('DATABASE_URL')
 TERMII_API_KEY = 'TLCeWhjTrntYDsZzVSHzYRrpIDHjzQMEybRSjEPaMMnlrvInycHSMEoUWhnBVw'
 TERMII_SENDER_ID = 'termii'
 CLOUD_NAME= env('CLOUD_NAME')
@@ -53,13 +53,13 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = os.getenv('DEBUG', 'False') == 'True'
-DEBUG = False
-ALLOWED_HOSTS = ['mountainviewprovince-1.onrender.com', 'localhost']
-BASE_URL = 'https://mountainviewprovince-1.onrender.com'
+DEBUG = True
+ALLOWED_HOSTS = ['mountainviewprovince-7xh4.onrender.com', 'localhost']
+BASE_URL = 'https://mountainviewprovince-7xh4.onrender.com'
 
 # Application definition
 CORS_ALLOWED_ORIGINS = [
-    "https://mountainviewprovince-1.onrender.com",
+    "https://mountainviewprovince-7xh4.onrender.com",
 ]
 
 
@@ -134,8 +134,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'sterlingtrust915@gmail.com'
-EMAIL_HOST_PASSWORD = 'kgdx qigm snfi smjw'
+EMAIL_HOST_USER = 'michaelogaje033@gmail.com'
+EMAIL_HOST_PASSWORD = 'mqpw imbi prhq npvu'
 
 DEFAULT_FROM_EMAIL = 'sterlingtrust915@gmail.com'
 
@@ -145,18 +145,26 @@ ADMIN_EMAIL ='michaelogaje033@gmail.com'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 from decouple import config
 
+
+#DATABASES = {
+    #'default': {
+       # 'ENGINE': 'django.db.backends.postgresql',
+      #  'NAME': config('DB_NAME'),
+     #   'USER': config('DB_USER'),
+    #    'PASSWORD': config('DB_PASSWORD'),
+   #     'HOST': config('DB_HOST', default='localhost'),
+  #      'PORT': config('DB_PORT', cast=int, default=5432),
+ #   }
+#}
+
+#DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', cast=int, default=5432),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
-
-DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 
 CSRF_TRUSTED_ORIGINS = [
     "https://c603-102-91-93-116.ngrok-free.app"

@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     hostels = Hostel.objects.filter(active=True).annotate(
-        total_bedspaces=Coalesce(Sum('blocks__rooms__avilable_bedspace'), Value(0))
+        total_bedspaces=Coalesce(Sum('blocks__rooms__available_bedspace'), Value(0))
     )
 
 
@@ -55,7 +55,7 @@ def detail_page(request, slug):
     for block in blocks:
         # Calculate the total bedspaces for the current block
         total_bedspaces = block.rooms.aggregate(
-            total_available_bedspaces=Sum('avilable_bedspace')
+            total_available_bedspaces=Sum('available_bedspace')
         )['total_available_bedspaces'] or 0
 
         blocks_with_bedspaces.append({
@@ -96,7 +96,7 @@ def detail_page(request, slug):
 def block_rooms(request, slug):
     block = get_object_or_404(Block, slug=slug)
     hostel_types = HostelType.objects.filter(block=block).annotate(
-        total_available_bedspaces=Sum('room__avilable_bedspace')
+        total_available_bedspaces=Sum('room__available_bedspace')
     )
     hostel_data = []
     for hostel_type in hostel_types:
@@ -178,7 +178,7 @@ def room_type_page(request, hid):
     # Fetch the hostel using the hostel ID
     hostel = get_object_or_404(Hostel, hid=hid)
     hostel_typess = HostelType.objects.filter(hostel=hostel).annotate(
-        total_available_bedspaces=Sum('room__avilable_bedspace')
+        total_available_bedspaces=Sum('room__available_bedspace')
     )
 
     hostel_data = []

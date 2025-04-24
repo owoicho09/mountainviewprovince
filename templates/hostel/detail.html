@@ -193,7 +193,7 @@
                 <a href="{% url 'hostel:block_rooms' block_data.block.slug %}">
                 <div class="form-group flex w-full gap-md">
                     <div class="b-img-holder">
-                        <img src="{% static 'images/book-one-img.png' %}" alt="hostel's image">
+                        <img src="{{block_data.block.image.url}}" alt="hostel's image">
                     </div>
                     <div class="b-info">
                         <span class="flex b-choice gap-3">

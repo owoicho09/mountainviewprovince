@@ -77,7 +77,7 @@
                     <div class="hostel-card">
                         <div class="img-holder">
 
-                               {% for gallery_item in room.hostel_type.hotel_gallery %}
+                               {% for gallery_item in hostel_data.hostel_type.hotel_gallery %}
                                 <img src="{{ gallery_item.image.url }}" alt="hostel image" loading="lazy">
                             {% endfor %}
                             </div>

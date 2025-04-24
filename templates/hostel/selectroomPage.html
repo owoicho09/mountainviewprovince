@@ -67,21 +67,9 @@
                     <div class="sub-option">
                         <div class="hostel-card">
                         <div class="img-holder">
-                                <img
-                                src="{% static 'images/hostel-card-img.png' %}"
-                                alt="hostel image"
-                                loading="lazy"
-                                >
-                                <img
-                                src="{% static 'images/bts.png' %}"
-                                alt="hostel image"
-                                loading="lazy"
-                                >
-                                <img
-                                src="{% static 'images/hostel-card-img.png' %}"
-                                alt="hostel image"
-                                loading="lazy"
-                                >
+                                 {% for gallery_item in hostel.hostel_type.hotel_gallery %}
+                                <img src="{{ gallery_item.image.url }}" alt="hostel image" loading="lazy">
+                            {% endfor %}
                         </div>
                             <div class="select-hostel-info ">
 
